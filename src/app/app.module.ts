@@ -3,9 +3,11 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './components/login/login.component';
+
 import { HeaderComponent } from './components/header/header.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { LoginComponent } from './components/auth/login/login.component';
+import { AppMaterialModule } from './shared/app-material/app-material.module';
 
 @NgModule({
   declarations: [
@@ -15,7 +17,8 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    AppMaterialModule
   ],
   providers: [
     provideAnimationsAsync()

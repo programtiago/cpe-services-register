@@ -1,0 +1,31 @@
+.navbar-app {
+    background-color: black;
+}
+
+.employee_icon_menu{
+    color: white;
+    transform: scale(1.5);
+    padding-right: 1em;
+}
+
+.menu{
+    margin-left: 2em;
+    color: white;
+}
+
+.spacer{
+    flex: 1 1 auto;
+}
+
+@media  only screen and (min-width: 450px) and (max-width: 1536px) {
+    .navbar-app{
+        min-height: 10%;
+    }
+}
+
+@media  only screen and (min-width: 1537px) and (max-width: 2560px) {
+    .navbar-app{
+        min-height: 5%;
+    }
+
+}
