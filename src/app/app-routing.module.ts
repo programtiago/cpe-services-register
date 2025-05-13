@@ -6,8 +6,8 @@ import { RepairOperationComponent } from './components/operation/repair-operatio
 
 const routes: Routes = [
   { path: '', component: LoginComponent},
-  { path: '/refurbishment', component: RefurbishmentOperationComponent},
-  { path: '/repair', component: RepairOperationComponent}
+  { path: 'refurbishment', component: RefurbishmentOperationComponent},
+  { path: 'repair', component: RepairOperationComponent}
 
 ];
 
