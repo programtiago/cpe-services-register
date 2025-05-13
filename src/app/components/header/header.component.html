@@ -1,12 +1,19 @@
 <mat-toolbar class="navbar-app">
     <mat-toolbar-row>
         <h1 style="color: white; font-size: larger;">CPE Services Register</h1>
-        <button class="menu" style="color: black;" mat-raised-button>Operation</button>
+        <button class="menu" style="color: black;" mat-raised-button [matMenuTriggerFor]="operationsMenu">Operation</button>
         <span class="spacer"></span>
         <div class="menu-navbar">
-            <button class="employee_icon_menu" mat-icon-button>
+            <button class="employee_icon_menu" mat-icon-button [matMenuTriggerFor]="logoutMenu">
                 <mat-icon>account_circle</mat-icon>
             </button>
+            <mat-menu #operationsMenu="matMenu">
+                <button (click)="navigateToPage('refurbishment')" mat-menu-item>Refurbishment</button>
+                <button (click)="navigateToPage('repair')" mat-menu-item>Repair</button>
+            </mat-menu>
+            <mat-menu #logoutMenu="matMenu">
+                <button routerLink="" mat-menu-item>Terminar sessão</button>
+            </mat-menu>
         </div>
     </mat-toolbar-row>
 </mat-toolbar>
