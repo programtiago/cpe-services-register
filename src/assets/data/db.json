@@ -7,5 +7,127 @@
             "password": "tiago",
             "token": "fake-jwt -token-123"
         }
+    ],
+
+    "cpes": [
+        {
+            "id": 1,
+            "sap": "123253",
+            "design": "CPE A",
+            "cpeData": [
+                {
+                    "id": 1,
+                    "sn": "CA912C3D1E5F2",
+                    "mac": "329030EF19F7",
+                    "status": "Received",
+                    "testStatus": "TEST_OK",
+                    "receptionId": "RECEP123"
+                },
+
+                {
+                    "id": 2,
+                    "sn": "CA9125Q3R1S4T8",
+                    "mac": "5CE0FDACBAEF",
+                    "status": "",
+                    "testStatus": "",
+                    "receptionId": ""
+                },
+
+                {
+                    "id": 3,
+                    "sn": "CA912Q0S5U7W1",
+                    "mac": "8B32F24EFA56",
+                    "status": "Dispatched",
+                    "testStatus": "TEST_OK",
+                    "receptionId": "RECEP323"
+                }
+            ]
+        },
+
+        {
+            "id": 2,
+            "sap": "123153",
+            "design": "CPE B",
+            "cpeData": [
+                {
+                    "id": 1,
+                    "sn": "CB212C3D130F2",
+                    "mac": "329030EF19F7",
+                    "status": "Received",
+                    "testStatus": "TEST_OK",
+                    "receptionId": "RECEP433"
+                },
+
+                {
+                    "id": 2,
+                    "sn": "CB212N5P8R3T0",
+                    "mac": "329030EF19F7",
+                    "status": "Received",
+                    "testStatus": "TEST_NOK",
+                    "receptionId": "RECEP433"
+                }
+            ]
+        },
+
+        {
+            "id": 3,
+            "sap": "123353",
+            "design": "CPE C",
+            "cpeData": [
+                {
+                    "id": 1,
+                    "sn": "CC1J5K2L9M4",
+                    "mac": "CF3D7D32E183",
+                    "status": "",
+                    "testStatus": "",
+                    "receptionId": ""
+                },
+
+                {
+                    "id": 2,
+                    "sn": "CC36B9D0F2H4",
+                    "mac": "CEF61866CD3B",
+                    "status": "Received",
+                    "testStatus": "TEST_NOK",
+                    "receptionId": "RECEP352"
+                }
+            ]
+        },
+
+        {
+            "id": 4,
+            "sap": "123453",
+            "design": "CPE D"
+        },
+
+        {
+            "id": 5,
+            "sap": "123553",
+            "design": "CPE E"
+        },
+
+        {
+            "id": 6,
+            "sap": "123653",
+            "design": "CPE F"
+        },
+
+        {
+            "id": 7,
+            "sap": "123753",
+            "design": "CPE G"
+        },
+
+        {
+            "id": 8,
+            "sap": "123853",
+            "design": "CPE H"
+        },
+
+        {
+            "id": 9,
+            "sap": "123953",
+            "design": "CPE I"
+        }
     ]
 }

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { RefurbishmentService } from './services/refurbishment.service';
 
 @Component({
   selector: 'app-refurbishment-operation',
@@ -7,4 +8,10 @@ import { Component } from '@angular/core';
 })
 export class RefurbishmentOperationComponent {
 
+  constructor(private refurbishmentService: RefurbishmentService){
+    this.refurbishmentService.getAllCpes().subscribe((res) => {
+      console.log("CPES: ", res)
+    })
+  }
+  
 }
