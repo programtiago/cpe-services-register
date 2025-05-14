@@ -1,0 +1,11 @@
+{
+    "users": [
+        {
+            "id": 1,
+            "workerno": 30038,
+            "name": "Tiago Silva",
+            "password": "tiago",
+            "token": "fake-jwt -token-123"
+        }
+    ]
+}

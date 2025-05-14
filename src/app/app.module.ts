@@ -10,6 +10,7 @@ import { LoginComponent } from './components/auth/login/login.component';
 import { AppMaterialModule } from './shared/app-material/app-material.module';
 import { RefurbishmentOperationComponent } from './components/operation/refurbishment-operation/refurbishment-operation.component';
 import { RepairOperationComponent } from './components/operation/repair-operation/repair-operation.component';
+import { provideHttpClient } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { RepairOperationComponent } from './components/operation/repair-operatio
     AppMaterialModule
   ],
   providers: [
-    provideAnimationsAsync()
+    provideAnimationsAsync(),
+    provideHttpClient()
   ],
   bootstrap: [AppComponent]
 })
