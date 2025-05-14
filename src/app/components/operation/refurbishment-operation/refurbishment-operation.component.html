@@ -1,1 +1,17 @@
-<p>refurbishment-operation works!</p>
+<div class="refurbishment-operation-card">
+    <mat-card>
+        <mat-card-content>
+           <form class="refurbishment-operation-form">
+            <mat-form-field appearance="fill" class="full-width">
+                <mat-label>Select the desired cpe</mat-label>
+                <mat-select name="modelSelect">
+                    <mat-option *ngFor="let cpe of cpesAvailable" [value]="cpesAvailable">
+                            {{ cpe.design }}
+                        </mat-option>
+                </mat-select>
+            </mat-form-field>
+           </form>
+        </mat-card-content>
+    </mat-card>
+</div>
+

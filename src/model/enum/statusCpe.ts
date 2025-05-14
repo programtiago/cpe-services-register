@@ -1,3 +1,3 @@
-enum StatusCpe {
+export enum StatusCpe {
     Received, Dispatched, Repaired
 }

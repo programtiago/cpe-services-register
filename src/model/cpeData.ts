@@ -1,3 +1,6 @@
+import { StatusTestCpe } from './enum/statusTestCpe';
+import { StatusCpe } from './enum/statusCpe'; // if you use StatusCpe
+
 export interface CpeData{
     sn: string,
     ean: string,
