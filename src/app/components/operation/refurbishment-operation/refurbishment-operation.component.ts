@@ -13,6 +13,7 @@ export class RefurbishmentOperationComponent {
   cpeChoosen: Cpe | null = null; //represents the Cpe selected from the mat-select list 
 
   @ViewChild('serialNumberInput') serialNumberInput!: ElementRef; //template directive to identify the serial input on the DOM
+  serialNumber: string = '';
   serialNumberScanned: string = '';
   serialNumberValid: boolean = false;
 
@@ -42,6 +43,14 @@ export class RefurbishmentOperationComponent {
           this.serialNumberInput.nativeElement.focus();
         }
       }, 200);
+    }
+  }
+
+  handleSerialNumberScan(event: KeyboardEvent){
+    if (event.key === 'Tab'){
+      event.preventDefault(); //doesn't allow to change focus to the next field
+      this.serialNumber = (event.target as HTMLInputElement).value; //assign to serialNumber where happened the event
+      console.log("Pressed tab key on serial field")
     }
   }
   

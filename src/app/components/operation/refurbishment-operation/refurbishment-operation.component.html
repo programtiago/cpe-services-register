@@ -13,7 +13,7 @@
 
             <mat-form-field *ngIf="cpeChoosen" appearance="fill" class="full-width">
                 <mat-label>S/N</mat-label>
-                <input #serialNumberInput style="font-size: 1.5em;" type="text" matInput placeholder="S/N">
+                <input #serialNumberInput (keydown)="handleSerialNumberScan($event)" style="font-size: 1.5em;" type="text" matInput placeholder="S/N">
                 <mat-icon fontSet="material-symbols-outlined" style="transform: scale(1.5);" matPrefix>barcode_scanner</mat-icon>
             </mat-form-field>
            </form>
