@@ -9,9 +9,20 @@ import { filter } from 'rxjs';
 })
 export class HeaderComponent implements OnInit{
 
-  operationTitle: string = 'Operations';
+  operationTitle: string = '';
 
-  constructor(private router: Router){}
+  constructor(private router: Router){
+    if (this.router.url === '/refurbishment'){
+      console.log(this.router.url)
+      this.operationTitle = 'Refurbishment'
+    }else if (this.router.url === '/repair'){
+      console.log(this.router.url)
+      this.operationTitle = 'Repair'
+    }else{
+      console.log(this.router.url)
+      this.operationTitle = 'Operation'
+    }
+  }
 
   ngOnInit(): void {
     this.router.events.pipe(
