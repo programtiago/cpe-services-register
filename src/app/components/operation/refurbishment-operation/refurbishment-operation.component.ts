@@ -11,7 +11,7 @@ import { CPE_SN_FORMATS } from '../../../../utils/serialNumberFormat';
 export class RefurbishmentOperationComponent {
 
   cpesAvailable: Cpe[] = [] //represent all the cpes available from json file
-  cpeChoosen: Cpe | null = null; //represents the Cpe selected from the mat-select list 
+  cpeChoosen!: Cpe; //represents the Cpe selected from the mat-select list 
 
   @ViewChild('serialNumberInput') serialNumberInput!: ElementRef; //template directive to identify the serial input on the DOM
   serialNumberScanned: string = '';
@@ -79,11 +79,26 @@ export class RefurbishmentOperationComponent {
     if (!this.serialNumberValid){
       const serial = <HTMLInputElement>this.serialNumberInput.nativeElement;
       serial.select();
-      this.cpeMessageErrorNotValid = `Serial Number indicated: ${this.serialNumberScanned} doesn't match with the cpe choosen ! `;
-      return;
+      this.cpeMessageErrorNotValid = `Serial Number indicated: ${sn} doesn't match with the cpe choosen ! `;
+      //return;
+    }else{
+      this.cpeMessageErrorNotValid = '';
     }
 
-    this.cpeMessageErrorNotValid = '';
+    const cpeSap = this.cpeChoosen.sap;
+
+    const cpeIsInStock = this.cpesAvailable.find(cpe => 
+        cpe.cpeData && cpe.cpeData.some(data => data.sn === sn)
+    )
+
+    if (!cpeIsInStock){
+        this.serialNumberValid = false;
+        this.cpeMessageErrorNotValid = `Serial Number:  ${sn} doesn't exist in stock !`
+        console.log("CPE ISN'T IN STOCK", cpeIsInStock)
+    }else{
+      this.cpeChoosen = cpeIsInStock;
+      console.log("CPE", this.cpeChoosen)
+    }
   }
   
 }

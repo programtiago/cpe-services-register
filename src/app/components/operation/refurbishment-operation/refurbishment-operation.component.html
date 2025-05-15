@@ -12,7 +12,7 @@
             </mat-form-field>
 
             <div *ngIf="this.cpeMessageErrorNotValid != ''" class="cpe-error-message">
-                <mat-icon fontSet="material-symbols-outlined" style="transform: scale(1.5);" matPrefix>error</mat-icon>
+                <mat-icon class="error-icon" fontSet="material-symbols-outlined" style="transform: scale(1.5);" matPrefix>error</mat-icon>
                 <span>{{this.cpeMessageErrorNotValid}}</span>
             </div>
 
