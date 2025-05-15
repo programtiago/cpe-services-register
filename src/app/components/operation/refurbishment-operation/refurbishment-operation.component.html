@@ -3,12 +3,18 @@
         <mat-card-content>
            <form class="refurbishment-operation-form">
             <mat-form-field appearance="fill" class="full-width">
-                <mat-label>Select the desired cpe</mat-label>
-                <mat-select name="modelSelect">
-                    <mat-option *ngFor="let cpe of cpesAvailable" [value]="cpesAvailable">
+                <mat-label>Cpe</mat-label>
+                <mat-select style="font-size: 1.5em;" name="modelSelect" (selectionChange)="updateCpeChoosen()" [(ngModel)]="cpeChoosen" placeholder="Select the desired cpe">
+                    <mat-option *ngFor="let cpe of cpesAvailable" [value]="cpe">
                             {{ cpe.design }}
                         </mat-option>
                 </mat-select>
+            </mat-form-field>
+
+            <mat-form-field *ngIf="cpeChoosen" appearance="fill" class="full-width">
+                <mat-label>S/N</mat-label>
+                <input style="font-size: 1.5em;" type="text" matInput placeholder="S/N">
+                <mat-icon fontSet="material-symbols-outlined" style="transform: scale(1.5);" matPrefix>barcode_scanner</mat-icon>
             </mat-form-field>
            </form>
         </mat-card-content>

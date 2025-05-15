@@ -9,13 +9,18 @@ import { Cpe } from '../../../../model/cpe';
 })
 export class RefurbishmentOperationComponent {
 
-  cpesAvailable: Cpe[] = []
+  cpesAvailable: Cpe[] = [] //represent all the cpes available from json file
+  cpeChoosen: Cpe | null = null; //represents the Cpe selected from the mat-select list 
 
   constructor(private refurbishmentService: RefurbishmentService){
     this.refurbishmentService.getAllCpes().subscribe((res) => {
       this.cpesAvailable = res;
       console.log("CPES: ", res)
     })
+  }
+
+  updateCpeChoosen(){
+    console.log("CPE CHOOSEN: ", this.cpeChoosen)
   }
   
 }
