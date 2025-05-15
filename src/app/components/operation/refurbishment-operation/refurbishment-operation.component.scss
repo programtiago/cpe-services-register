@@ -21,3 +21,13 @@
     margin-top: 0.15em;
     flex-shrink: 0;
 }
+
+.sucess-serialNumber-read-icon{
+    transform: scale(1.5);
+}
+
+.fail-serialNumber-read-icon{
+    transform: scale(1.5);
+    color: red;
+}
+

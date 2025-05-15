@@ -16,10 +16,12 @@
                 <span>{{this.cpeMessageErrorNotValid}}</span>
             </div>
 
-            <mat-form-field *ngIf="cpeChoosen" appearance="fill" class="full-width">
+            <mat-form-field *ngIf="cpeChoosen" appearance="fill" class="full-width" [ngClass]="{'error-state': cpeMessageErrorNotValid !== ''}">
                 <mat-label>S/N</mat-label>
                 <input #serialNumberInput (keydown)="handleSerialNumberScan($event)" style="font-size: 1.5em;" type="text" matInput placeholder="S/N">
                 <mat-icon fontSet="material-symbols-outlined" style="transform: scale(1.5);" matPrefix>barcode_scanner</mat-icon>
+                <mat-icon class="sucess-serialNumber-read-icon" *ngIf="serialNumberValid && cpeChoosen" matSuffix fontSet="material-symbols-outlined" style="color: green;">check_circle</mat-icon>
+                <mat-icon class="fail-serialNumber-read-icon" *ngIf="!serialNumberValid && cpeChoosen && this.serialNumberScanned != ''" matSuffix fontSet="material-symbols-outlined" style="color: red;">cancel</mat-icon>
             </mat-form-field>
            </form>
         </mat-card-content>

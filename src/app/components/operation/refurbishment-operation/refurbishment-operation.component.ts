@@ -80,7 +80,7 @@ export class RefurbishmentOperationComponent {
       const serial = <HTMLInputElement>this.serialNumberInput.nativeElement;
       serial.select();
       this.cpeMessageErrorNotValid = `Serial Number indicated: ${sn} doesn't match with the cpe choosen ! `;
-      //return;
+      return;
     }else{
       this.cpeMessageErrorNotValid = '';
     }
