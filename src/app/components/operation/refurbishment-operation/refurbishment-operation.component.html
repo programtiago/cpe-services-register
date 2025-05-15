@@ -11,6 +11,11 @@
                 </mat-select>
             </mat-form-field>
 
+            <div *ngIf="this.cpeMessageErrorNotValid != ''" class="cpe-error-message">
+                <mat-icon fontSet="material-symbols-outlined" style="transform: scale(1.5);" matPrefix>error</mat-icon>
+                <span>{{this.cpeMessageErrorNotValid}}</span>
+            </div>
+
             <mat-form-field *ngIf="cpeChoosen" appearance="fill" class="full-width">
                 <mat-label>S/N</mat-label>
                 <input #serialNumberInput (keydown)="handleSerialNumberScan($event)" style="font-size: 1.5em;" type="text" matInput placeholder="S/N">

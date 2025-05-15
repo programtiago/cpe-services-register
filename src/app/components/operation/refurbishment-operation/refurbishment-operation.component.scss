@@ -6,3 +6,18 @@
 .full-width{
     width: 100%;
 }
+
+.cpe-error-message{
+    display: flex;
+    color: #d32f2f;
+    align-items: flex-start;
+    font-size: 1.3em;
+    margin-bottom: 1em;
+    gap: 0.7em;
+    margin-top: 8px;
+}
+
+.cpe-error-message mat-icon{
+    margin-top: 0.15em;
+    flex-shrink: 0;
+}
