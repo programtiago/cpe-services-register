@@ -67,3 +67,14 @@
     color: red;
 }
 
+.checkbox-group {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    flex-wrap: wrap;
+    gap: 16px;
+    max-width: 100%;
+    justify-items: start;
+    margin-top: 1em;
+}
+
+

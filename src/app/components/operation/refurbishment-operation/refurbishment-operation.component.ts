@@ -3,7 +3,6 @@ import { RefurbishmentService } from './services/refurbishment.service';
 import { Cpe } from '../../../../model/cpe';
 import { CPE_SN_FORMATS } from '../../../../utils/serialNumberFormat';
 import { Service } from '../../../../model/service';
-import { StatusTestCpe } from '../../../../model/enum/statusTestCpe';
 import { StatusCpe } from '../../../../model/enum/statusCpe';
 
 @Component({
@@ -59,8 +58,6 @@ export class RefurbishmentOperationComponent implements AfterViewChecked{
 
   //focus serialNumberInput field after validate the cpe choosen
   chooseCpeChoosen(){
-    //let cpeSelected: string = ''
-
     this.serialNumberValid = false;
     this.cpeMessageErrorNotValid = ''
     this.serialNumberScanned = '';
@@ -123,15 +120,11 @@ export class RefurbishmentOperationComponent implements AfterViewChecked{
     }
 
     this.serialNumberValid = true;
+    this.getAllowedServicesByCpeId();
   }
 
   evaluateCpeStatusAndTestStatus(sn: string, cpe: Cpe): boolean {
     const cpeEntry = cpe.cpeData?.find(data => data.sn === sn);
-
-    if (!cpeEntry) {
-        this.cpeMessageErrorNotValid = `Serial Number indicated: ${sn} does not exist in stock`;
-        return false;
-    }
   
     let macCpe = '';
     let reception = '';
@@ -144,12 +137,16 @@ export class RefurbishmentOperationComponent implements AfterViewChecked{
       status = cpeEntry.status ?? '';
       testStatus = cpeEntry.testStatus ?? '';
 
+      console.log("MAC", macCpe + "\nReception", reception, "\nStatus", status + "\nTest Status", testStatus)
+
       if (!reception || status !== StatusCpe.Received){
-        this.cpeMessageErrorNotValid = `Serial Number indicated: ${sn} does not have a test`
+        this.cpeMessageErrorNotValid = `Serial Number indicated: ${sn} does not exist in stock`
+        return false;
       }
 
       if (!macCpe){
         this.cpeMessageErrorNotValid = `Serial Number indicated: ${sn} does not have a test`
+        return false;
       }
 
       if (!testStatus) {
@@ -162,11 +159,21 @@ export class RefurbishmentOperationComponent implements AfterViewChecked{
         return false;
       }
 
+      if (!cpeEntry){
+        this.cpeMessageErrorNotValid = `Serial Number indicated: ${sn} does not exist in stock`;
+        return false;
+      }
+
       console.log("MAC", macCpe + "\nReception", reception, "\nStatus", status + "\nTest Status", testStatus)
     }
 
-    //this.serialNumberValid = true;
     this.cpeMessageErrorNotValid = ''
     return true;
+  }
+
+  getAllowedServicesByCpeId(){
+    const cpe = this.cpesAvailable.find(cpe => cpe.id === this.cpeChoosen.id);
+
+    this.allowedServicesApplyToCpe = cpe?.allowedServices ?? [];
   }
 }
