@@ -128,21 +128,44 @@ export class RefurbishmentOperationComponent implements AfterViewChecked{
   evaluateCpeStatusAndTestStatus(sn: string, cpe: Cpe): boolean {
     const cpeEntry = cpe.cpeData?.find(data => data.sn === sn);
 
-    if (!cpeEntry || cpeEntry && cpeEntry.receptionId === '' || cpeEntry && cpeEntry.status?.toLowerCase() === StatusCpe.Dispatched.toLowerCase()){
-      this.cpeMessageErrorNotValid = `Serial Number: ${sn} does not exist in stock !`;
-      return false;
+    if (!cpeEntry) {
+        this.cpeMessageErrorNotValid = `Serial Number indicated: ${sn} does not exist in stock`;
+        return false;
     }
-    /*
-    else if (cpeEntry && cpeEntry.receptionId === '' ){
-      this.cpeMessageErrorNotValid = `Serial Number: ${sn} does not exist in stock !`;
-      return false;
-    }else if (cpeEntry && cpeEntry.status?.toLowerCase() === StatusCpe.Dispatched.toLowerCase()){
-      this.cpeMessageErrorNotValid = `Serial Number: ${sn} does not exist in stock !`;
-      return false;
-    }
-    */
+  
+    let macCpe = '';
+    let reception = '';
+    let status = '';
+    let testStatus = '';
 
-    this.serialNumberValid = true;
+    if (cpeEntry){
+      macCpe = cpeEntry.mac ?? '';
+      reception = cpeEntry.receptionId ?? '';
+      status = cpeEntry.status ?? '';
+      testStatus = cpeEntry.testStatus ?? '';
+
+      if (!reception || status !== StatusCpe.Received){
+        this.cpeMessageErrorNotValid = `Serial Number indicated: ${sn} does not have a test`
+      }
+
+      if (!macCpe){
+        this.cpeMessageErrorNotValid = `Serial Number indicated: ${sn} does not have a test`
+      }
+
+      if (!testStatus) {
+        this.cpeMessageErrorNotValid = `Serial Number indicated: ${sn} does not have a test`;
+        return false;
+      }
+
+      if (testStatus === "TEST_NOK"){
+        this.cpeMessageErrorNotValid = `Serial Number indicated: ${sn} does not have a test ok !`;
+        return false;
+      }
+
+      console.log("MAC", macCpe + "\nReception", reception, "\nStatus", status + "\nTest Status", testStatus)
+    }
+
+    //this.serialNumberValid = true;
     this.cpeMessageErrorNotValid = ''
     return true;
   }
