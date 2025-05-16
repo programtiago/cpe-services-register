@@ -47,6 +47,14 @@ export class RefurbishmentOperationComponent {
         }
       }, 200);
     }
+
+    //clear serial number input and cpe error message
+    if (this.serialNumberScanned.length != 0){
+      this.serialNumberValid = false;
+      this.serialNumberScanned = '';
+      this.serialNumberInput.nativeElement.value = '';
+      this.cpeMessageErrorNotValid = '';
+    }
   }
 
   handleSerialNumberScan(event: KeyboardEvent){

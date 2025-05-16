@@ -1,3 +1,14 @@
+.mat-mdc-form-field {
+    --mdc-filled-text-field-focus-active-indicator-color: black !important;
+    --mdc-filled-text-field-focus-label-text-color: black !important;
+    --mdc-filled-text-field-focus-container-color: black !important;
+    --mat-mdc-form-field-focus-label-color: black !important;
+}
+
+.mat-form-field.mat-focused .mat-form-field-outline {
+    color: black !important;
+}
+
 .container{
     display: flex;
     justify-content: center;
