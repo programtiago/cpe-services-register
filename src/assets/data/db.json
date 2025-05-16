@@ -27,7 +27,7 @@
                 {
                     "id": 2,
                     "sn": "CA9125Q3R1S4T8",
-                    "mac": "5CE0FDACBAEF",
+                    "mac": "",
                     "status": "Dispatched",
                     "testStatus": "",
                     "receptionId": ""
@@ -138,8 +138,8 @@
             "cpeData": [
                 {
                     "id": 1,
-                    "sn": "CC1J5K2L9M412",
-                    "mac": "CF3D7D32E183",
+                    "sn": "CC1J5K2L9M41231",
+                    "mac": "",
                     "status": "",
                     "testStatus": "",
                     "receptionId": ""
@@ -147,7 +147,7 @@
 
                 {
                     "id": 2,
-                    "sn": "CC36B9D0F2H42",
+                    "sn": "CC36B9D0F2H4215",
                     "mac": "CEF61866CD3B",
                     "status": "Received",
                     "testStatus": "TEST_NOK",

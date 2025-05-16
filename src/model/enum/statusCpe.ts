@@ -1,3 +1,5 @@
 export enum StatusCpe {
-    Received, Dispatched, Repaired
+    Received = 'Received', 
+    Dispatched = 'Dispatched', 
+    Repaired = 'Repaired'
 }
