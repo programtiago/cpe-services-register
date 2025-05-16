@@ -2,6 +2,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { RefurbishmentService } from './services/refurbishment.service';
 import { Cpe } from '../../../../model/cpe';
 import { CPE_SN_FORMATS } from '../../../../utils/serialNumberFormat';
+import { Service } from '../../../../model/service';
 
 @Component({
   selector: 'app-refurbishment-operation',
@@ -24,6 +25,8 @@ export class RefurbishmentOperationComponent {
      - if has a test NOK
   */   
   cpeMessageErrorNotValid: string = '' 
+
+  allowedServicesApplyToCpe: Service[] = []
 
   constructor(private refurbishmentService: RefurbishmentService){
     this.refurbishmentService.getAllCpes().subscribe((res) => {

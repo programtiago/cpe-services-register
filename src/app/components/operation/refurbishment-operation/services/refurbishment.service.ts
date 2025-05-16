@@ -15,4 +15,8 @@ export class RefurbishmentService {
   getAllCpes():Observable<Cpe[]>{
     return this.http.get<Cpe[]>(`${this.urlCpe}`);
   }
+
+  getCpeById(id: number):Observable<Cpe>{
+    return this.http.get<Cpe>(`${this.urlCpe}/${id}`)
+  }
 }
