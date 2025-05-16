@@ -1,15 +1,17 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { AfterViewChecked, Component, ElementRef, ViewChild } from '@angular/core';
 import { RefurbishmentService } from './services/refurbishment.service';
 import { Cpe } from '../../../../model/cpe';
 import { CPE_SN_FORMATS } from '../../../../utils/serialNumberFormat';
 import { Service } from '../../../../model/service';
+import { StatusTestCpe } from '../../../../model/enum/statusTestCpe';
+import { StatusCpe } from '../../../../model/enum/statusCpe';
 
 @Component({
   selector: 'app-refurbishment-operation',
   templateUrl: './refurbishment-operation.component.html',
   styleUrl: './refurbishment-operation.component.scss'
 })
-export class RefurbishmentOperationComponent {
+export class RefurbishmentOperationComponent implements AfterViewChecked{
 
   cpesAvailable: Cpe[] = [] //represent all the cpes available from json file
   cpeChoosen!: Cpe; //represents the Cpe selected from the mat-select list 
@@ -18,6 +20,8 @@ export class RefurbishmentOperationComponent {
   serialNumberScanned: string = '';
   serialNumberValid: boolean = false;
 
+  lengthSn: number = 0; 
+
   //represents the error to show after sn scanned: 
   /* - if doesn't follow the parten of cpe choosen 
      - if doesn't has a test
@@ -25,6 +29,7 @@ export class RefurbishmentOperationComponent {
      - if has a test NOK
   */   
   cpeMessageErrorNotValid: string = '' 
+  private shouldFocusSerialInput = false;
 
   allowedServicesApplyToCpe: Service[] = []
 
@@ -34,27 +39,37 @@ export class RefurbishmentOperationComponent {
     })
   }
 
+  ngAfterViewChecked(): void {
+    if (this.shouldFocusSerialInput && this.serialNumberInput && this.serialNumberInput.nativeElement){
+      this.serialNumberInput.nativeElement.focus();
+      this.shouldFocusSerialInput = false;
+    }
+  }
+
+  defineLengthSerialNumber(){
+    if (this.cpeChoosen.design === 'CPE A'){
+      this.lengthSn = 13;
+    }else if (this.cpeChoosen.design === 'CPE B'){
+      this.lengthSn = 12;
+    }else{
+      this.lengthSn = 15;
+    }
+  }
+
   //focus serialNumberInput field after validate the cpe choosen
   chooseCpeChoosen(){
-    let cpeSelected: string = ''
+    //let cpeSelected: string = ''
 
-    if (this.cpeChoosen){
-      cpeSelected = this.cpeChoosen.design; 
+    this.serialNumberValid = false;
+    this.cpeMessageErrorNotValid = ''
+    this.serialNumberScanned = '';
+    this.shouldFocusSerialInput = true;
 
       setTimeout(() => {
         if (this.serialNumberInput && this.serialNumberInput.nativeElement){
           this.serialNumberInput.nativeElement.focus();
         }
-      }, 200);
-    }
-    
-    //clear serial number input and cpe error message
-    if (this.serialNumberScanned.length != 0){
-      this.serialNumberValid = false;
-      this.serialNumberInput.nativeElement.value = '';
-      this.cpeMessageErrorNotValid = '';
-      this.serialNumberScanned = '';
-    }
+      }, 100);
   }
 
   handleSerialNumberScan(event: KeyboardEvent){
@@ -63,6 +78,7 @@ export class RefurbishmentOperationComponent {
       this.serialNumberScanned = (event.target as HTMLInputElement).value; //assign to serialNumber where happened the event
       console.log("Pressed tab key on serial field")
       this.validateSn(this.serialNumberScanned)
+      this.defineLengthSerialNumber();
     }
   }
 
@@ -97,13 +113,38 @@ export class RefurbishmentOperationComponent {
       console.log(this.cpeMessageErrorNotValid)
     }
 
-    const existsInSelected = this.cpeChoosen.cpeData?.some(data => data.sn === sn);
-
-    if (!existsInSelected){
+    if (!this.evaluateCpeStatusAndTestStatus(sn, this.cpeChoosen)){
       this.serialNumberValid = false;
-      this.cpeMessageErrorNotValid = `Serial Number: ${sn} does not exist in stock for the selected CPE!`;
+      const snInput = <HTMLInputElement>this.serialNumberInput.nativeElement;
+      snInput.select();
       return;
     }
   }
-  
+
+  evaluateCpeStatusAndTestStatus(sn: string, cpe: Cpe): boolean {
+    const cpeEntry = cpe.cpeData?.find(data => data.sn === sn);
+    console.log(cpeEntry?.testStatus)
+
+    if (!cpeEntry){
+      this.serialNumberValid = false;
+      this.cpeMessageErrorNotValid = `Serial Number: ${sn} does not exist in stock for the selected CPE!`;
+      return false;
+    }
+
+    if (cpeEntry && cpeEntry.testStatus === StatusTestCpe.TEST_NOK){
+      this.serialNumberValid = false;
+      this.cpeMessageErrorNotValid = `Serial Number: ${sn} doesn't have a TEST OK.`
+      return false;
+    }
+
+    if (cpeEntry.status === StatusCpe.Dispatched || cpeEntry.receptionId === ''){
+      this.serialNumberValid = false;
+      this.cpeMessageErrorNotValid = `Serial Number: ${sn} does not exist in stock.`
+      return false;
+    }
+
+    this.serialNumberValid = true;
+    this.cpeMessageErrorNotValid = ''
+    return true;
+  }
 }
