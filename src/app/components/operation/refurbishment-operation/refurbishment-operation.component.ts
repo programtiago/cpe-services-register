@@ -47,13 +47,13 @@ export class RefurbishmentOperationComponent {
         }
       }, 200);
     }
-
+    
     //clear serial number input and cpe error message
     if (this.serialNumberScanned.length != 0){
       this.serialNumberValid = false;
-      this.serialNumberScanned = '';
       this.serialNumberInput.nativeElement.value = '';
       this.cpeMessageErrorNotValid = '';
+      this.serialNumberScanned = '';
     }
   }
 
@@ -94,21 +94,15 @@ export class RefurbishmentOperationComponent {
       return;
     }else{
       this.cpeMessageErrorNotValid = '';
+      console.log(this.cpeMessageErrorNotValid)
     }
 
-    const cpeSap = this.cpeChoosen.sap;
+    const existsInSelected = this.cpeChoosen.cpeData?.some(data => data.sn === sn);
 
-    const cpeIsInStock = this.cpesAvailable.find(cpe => 
-        cpe.cpeData && cpe.cpeData.some(data => data.sn === sn)
-    )
-
-    if (!cpeIsInStock){
-        this.serialNumberValid = false;
-        this.cpeMessageErrorNotValid = `Serial Number:  ${sn} doesn't exist in stock !`
-        console.log("CPE ISN'T IN STOCK", cpeIsInStock)
-    }else{
-      this.cpeChoosen = cpeIsInStock;
-      console.log("CPE", this.cpeChoosen)
+    if (!existsInSelected){
+      this.serialNumberValid = false;
+      this.cpeMessageErrorNotValid = `Serial Number: ${sn} does not exist in stock for the selected CPE!`;
+      return;
     }
   }
   
