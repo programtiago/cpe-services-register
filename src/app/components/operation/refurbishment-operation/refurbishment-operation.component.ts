@@ -7,6 +7,7 @@ import { StatusCpe } from '../../../../model/enum/statusCpe';
 import { RefurbishmentOperation } from '../../../../model/refurbishmentOperation';
 import { AuthService } from '../../auth/services/auth.service';
 import { User } from '../../../../model/user';
+import { SnackbarService } from './services/snackbar.service';
 
 @Component({
   selector: 'app-refurbishment-operation',
@@ -41,12 +42,15 @@ export class RefurbishmentOperationComponent implements AfterViewChecked{
 
   cpeRefurbishmentRegister!: RefurbishmentOperation;
 
-  constructor(private refurbishmentService: RefurbishmentService, private cdref: ChangeDetectorRef, private authService: AuthService ){
+  constructor(private refurbishmentService: RefurbishmentService, private cdref: ChangeDetectorRef, private authService: AuthService, 
+    private snackbarService: SnackbarService
+  ){
     this.refurbishmentService.getAllCpes().subscribe((res) => {
       this.cpesAvailable = res;
     })
 
     this.userLogged = this.authService.getLoggedUser();
+
   }
 
   ngAfterViewChecked(): void {
@@ -199,7 +203,7 @@ export class RefurbishmentOperationComponent implements AfterViewChecked{
   registerOperationCpeRefurbishment(){
 
     this.cpeRefurbishmentRegister = {
-      id: Math.random() + 1,
+      id: Math.floor(Math.random() * 101),
       cpe: {
         id: this.cpeChoosen.id,
         sap: this.cpeChoosen.sap,
@@ -222,12 +226,13 @@ export class RefurbishmentOperationComponent implements AfterViewChecked{
       servicesApplied: this.servicesApplied
     }
 
+    if (this.cpeRefurbishmentRegister.id != null){
+      this.snackbarService.sucess(`Refurbishment operation on S/N ${this.cpeRefurbishmentRegister.cpe.cpeData[0].sn} sucessfully registered ! `);
+    }
     console.log(this.cpeRefurbishmentRegister)
   }
 
   onChange(value: any){
     this.servicesApplied.push(value);
-
-    console.log(this.cpeRefurbishmentRegister)
   }
 }

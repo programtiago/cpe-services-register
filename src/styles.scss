@@ -97,3 +97,24 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
         }
     }
 }
+
+.snackbar-container{
+    padding-top: 3.5em;
+
+    &.success .mdc-snackbar__surface {
+        background-color: #5cd65c !important;
+        color: white !important;
+    }
+
+    &.error .mdc-snackbar__surface {
+        background-color: #c62828 !important;
+        color: white !important;
+    }
+
+    &.warning .mdc-snackbar__surface {
+        background-color: #ff8f00 !important;
+        color: white !important;
+    }
+}
+
+
