@@ -4,6 +4,9 @@ import { Cpe } from '../../../../model/cpe';
 import { CPE_SN_FORMATS } from '../../../../utils/serialNumberFormat';
 import { Service } from '../../../../model/service';
 import { StatusCpe } from '../../../../model/enum/statusCpe';
+import { RefurbishmentOperation } from '../../../../model/refurbishmentOperation';
+import { AuthService } from '../../auth/services/auth.service';
+import { User } from '../../../../model/user';
 
 @Component({
   selector: 'app-refurbishment-operation',
@@ -13,13 +16,16 @@ import { StatusCpe } from '../../../../model/enum/statusCpe';
 export class RefurbishmentOperationComponent implements AfterViewChecked{
 
   cpesAvailable: Cpe[] = [] //represent all the cpes available from json file
-  cpeChoosen!: Cpe; //represents the Cpe selected from the mat-select list 
+  cpeChoosen!: Cpe; //represents the Cpe selected from the mat-select list
+  cpeEntry!: Cpe 
 
   @ViewChild('serialNumberInput') serialNumberInput!: ElementRef; //template directive to identify the serial input on the DOM
   serialNumberScanned: string = '';
   serialNumberValid: boolean = false;
 
   lengthSn: number = 0; 
+
+  userLogged: User | null;
 
   //represents the error to show after sn scanned: 
   /* - if doesn't follow the parten of cpe choosen 
@@ -31,11 +37,16 @@ export class RefurbishmentOperationComponent implements AfterViewChecked{
   private shouldFocusSerialInput = false;
 
   allowedServicesApplyToCpe: Service[] = []
+  servicesApplied: Service[] = []
 
-  constructor(private refurbishmentService: RefurbishmentService, private cdref: ChangeDetectorRef ){
+  cpeRefurbishmentRegister!: RefurbishmentOperation;
+
+  constructor(private refurbishmentService: RefurbishmentService, private cdref: ChangeDetectorRef, private authService: AuthService ){
     this.refurbishmentService.getAllCpes().subscribe((res) => {
       this.cpesAvailable = res;
     })
+
+    this.userLogged = this.authService.getLoggedUser();
   }
 
   ngAfterViewChecked(): void {
@@ -46,6 +57,7 @@ export class RefurbishmentOperationComponent implements AfterViewChecked{
     }
   }
 
+  //defines the length allowed on serial input for each cpe 
   defineLengthSerialNumber(){
     if (this.cpeChoosen.design === 'CPE A'){
       this.lengthSn = 13;
@@ -76,7 +88,6 @@ export class RefurbishmentOperationComponent implements AfterViewChecked{
     if (event.key === 'Tab'){
       event.preventDefault(); //doesn't allow to change focus to the next field
       this.serialNumberScanned = (event.target as HTMLInputElement).value; //assign to serialNumber where happened the event
-      console.log("Pressed tab key on serial field")
       this.validateSn(this.serialNumberScanned)
     }
   }
@@ -96,6 +107,12 @@ export class RefurbishmentOperationComponent implements AfterViewChecked{
       return;
     } 
 
+    if (sn.length === 0){
+      this.serialNumberValid = false;
+      this.cpeMessageErrorNotValid = 'You must enter a serial number to proceed !';
+      return;
+    }
+
     const hasValidPrefix = format.prefix.some(prefix => sn.startsWith(prefix)) //check if the prefix matches with cpe choosen
     const hasValidLength = format.length.includes(sn.length) //check if the length of the serial number matches with cpe choosen
 
@@ -109,7 +126,6 @@ export class RefurbishmentOperationComponent implements AfterViewChecked{
       return;
     }else{
       this.cpeMessageErrorNotValid = '';
-      console.log(this.cpeMessageErrorNotValid)
     }
 
     if (!this.evaluateCpeStatusAndTestStatus(sn, this.cpeChoosen)){
@@ -125,6 +141,7 @@ export class RefurbishmentOperationComponent implements AfterViewChecked{
 
   evaluateCpeStatusAndTestStatus(sn: string, cpe: Cpe): boolean {
     const cpeEntry = cpe.cpeData?.find(data => data.sn === sn);
+    console.log('CPE Entry found:', cpeEntry);
   
     let macCpe = '';
     let reception = '';
@@ -168,6 +185,7 @@ export class RefurbishmentOperationComponent implements AfterViewChecked{
     }
 
     this.cpeMessageErrorNotValid = ''
+
     return true;
   }
 
@@ -175,5 +193,41 @@ export class RefurbishmentOperationComponent implements AfterViewChecked{
     const cpe = this.cpesAvailable.find(cpe => cpe.id === this.cpeChoosen.id);
 
     this.allowedServicesApplyToCpe = cpe?.allowedServices ?? [];
+
+  }
+
+  registerOperationCpeRefurbishment(){
+
+    this.cpeRefurbishmentRegister = {
+      id: Math.random() + 1,
+      cpe: {
+        id: this.cpeChoosen.id,
+        sap: this.cpeChoosen.sap,
+        design: this.cpeChoosen.design,
+        allowedServices: [],
+        cpeData: [
+          {
+            sn: this.cpeChoosen.cpeData[0]?.sn,
+            ean: this.cpeChoosen.cpeData[0]?.ean,
+            mac: this.cpeChoosen.cpeData[0]?.mac,
+            status: this.cpeChoosen.cpeData[0]?.status,
+            testStatus: this.cpeChoosen.cpeData[0]?.testStatus,
+            dateHourTest: new Date().toLocaleDateString(),
+            receptionId: this.cpeChoosen.cpeData[0]?.receptionId,
+          }
+        ],
+      },
+      dateHourOperation: new Date(),
+      user: this.authService.getLoggedUser() as User,
+      servicesApplied: this.servicesApplied
+    }
+
+    console.log(this.cpeRefurbishmentRegister)
+  }
+
+  onChange(value: any){
+    this.servicesApplied.push(value);
+
+    console.log(this.cpeRefurbishmentRegister)
   }
 }

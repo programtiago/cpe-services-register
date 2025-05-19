@@ -19,6 +19,7 @@
                     "id": 1,
                     "sn": "CA912Q0S5U7W1",
                     "mac": "329030EF19F7",
+                    "ean": "978020137962",
                     "status": "Received",
                     "testStatus": "TEST_OK",
                     "receptionId": "RECEP123"
@@ -28,6 +29,7 @@
                     "id": 2,
                     "sn": "CA9125Q3R1S42",
                     "mac": "",
+                    "ean": "",
                     "status": "",
                     "testStatus": "",
                     "receptionId": ""
@@ -39,7 +41,8 @@
                     "mac": "8B32F24EFA56",
                     "status": "Dispatched",
                     "testStatus": "TEST_OK",
-                    "receptionId": "RECEP323"
+                    "receptionId": "RECEP323",
+                    "ean": ""
                 }
             ],
             "allowedServices": [
@@ -89,6 +92,7 @@
                     "id": 1,
                     "sn": "CB212C3D1304",
                     "mac": "329030EF19F7",
+                    "ean": "3544168518603",
                     "status": "Received",
                     "testStatus": "TEST_OK",
                     "receptionId": "RECEP433"
@@ -99,6 +103,7 @@
                     "sn": "CB212N5P8R31",
                     "mac": "329030EF19F7",
                     "status": "Received",
+                    "ean": "3544168518603",
                     "testStatus": "TEST_NOK",
                     "receptionId": "RECEP433"
                 }
@@ -140,6 +145,7 @@
                     "id": 1,
                     "sn": "CC1J5K2L9M41231",
                     "mac": "",
+                    "ean": "401234567890",
                     "status": "Received",
                     "testStatus": "",
                     "receptionId": "RECEP353"
@@ -149,6 +155,7 @@
                     "id": 2,
                     "sn": "CC36B9D0F2H4215",
                     "mac": "CEF61866CD3B",
+                    "ean": "401234567890", 
                     "status": "Received",
                     "testStatus": "TEST_NOK",
                     "receptionId": "RECEP352"

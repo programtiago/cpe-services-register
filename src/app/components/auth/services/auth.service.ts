@@ -26,6 +26,14 @@ export class AuthService {
     )
   }
 
+  getLoggedUser(): User | null{
+    const user = localStorage.getItem('currentUser');
+    if (!user) {
+      throw new Error('No user is currently logged in.');
+    }
+    return JSON.parse(user) as User;
+  }
+
   logout(): void {
     localStorage.removeItem('currentUser')
   }

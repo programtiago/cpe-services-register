@@ -32,12 +32,15 @@
             <mat-card-content style="display: flex; justify-content: center;">
                 <div class="checkbox-group">
                     <div *ngFor="let service of allowedServicesApplyToCpe">
-                        <mat-checkbox>{{service.description}}</mat-checkbox>
+                        <mat-checkbox (change)="onChange(service.description)">{{service.description}}</mat-checkbox>
                     </div>
                 </div>
             </mat-card-content>
            </mat-card>
         </mat-card-content>
+        <mat-card-actions *ngIf="serialNumberValid" style="display: flex; justify-content: center;">
+            <button (click)="registerOperationCpeRefurbishment()" style="transform: scale(1.3);" mat-button fontSet="material-symbols-outlined"><mat-icon>add_circle</mat-icon></button>
+        </mat-card-actions>
     </mat-card>
 </div>
 
