@@ -17,17 +17,3 @@
 .spacer{
     flex: 1 1 auto;
 }
-
-@media  only screen and (min-width: 450px) and (max-width: 1536px) {
-    .navbar-app{
-        min-height: 8%;
-    }
-
-}
-
-@media  only screen and (min-width: 1537px) and (max-width: 2560px) {
-    .navbar-app{
-        min-height: 5%;
-    }
-
-}
