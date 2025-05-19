@@ -26,6 +26,12 @@ export class AuthService {
     )
   }
 
+  getSafeUser(user: User): Omit<User, 'password' | 'token'>{
+    const { password, token, ...safeUser } = user;
+    
+    return safeUser;
+  }
+
   getLoggedUser(): User | null{
     const user = localStorage.getItem('currentUser');
     if (!user) {

@@ -41,6 +41,7 @@ export class RefurbishmentOperationComponent implements AfterViewChecked{
   servicesApplied: Service[] = []
 
   cpeRefurbishmentRegister!: RefurbishmentOperation;
+  listRefurbishmentRegister: RefurbishmentOperation[] = []
 
   constructor(private refurbishmentService: RefurbishmentService, private cdref: ChangeDetectorRef, private authService: AuthService, 
     private snackbarService: SnackbarService
@@ -222,14 +223,16 @@ export class RefurbishmentOperationComponent implements AfterViewChecked{
         ],
       },
       dateHourOperation: new Date(),
-      user: this.authService.getLoggedUser() as User,
+      user: this.authService.getSafeUser(this.userLogged as User),
       servicesApplied: this.servicesApplied
     }
 
-    if (this.cpeRefurbishmentRegister.id != null){
-      this.snackbarService.sucess(`Refurbishment operation on S/N ${this.cpeRefurbishmentRegister.cpe.cpeData[0].sn} sucessfully registered ! `);
-    }
-    console.log(this.cpeRefurbishmentRegister)
+    this.refurbishmentService.createRefurbishmentOperationCpe(this.cpeRefurbishmentRegister).subscribe((res) => {
+      if (res.id != null){
+         this.snackbarService.sucess(`Refurbishment operation on S/N ${this.cpeRefurbishmentRegister.cpe.cpeData[0].sn} sucessfully registered ! `);
+         this.listRefurbishmentRegister.push(res);
+      }
+    })
   }
 
   onChange(value: any){

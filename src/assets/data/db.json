@@ -1,201 +1,331 @@
 {
-    "users": [
+  "users": [
+    {
+      "id": 1,
+      "workerno": 30038,
+      "name": "Tiago Silva",
+      "password": "tiago",
+      "token": "fake-jwt -token-123"
+    }
+  ],
+  "cpes": [
+    {
+      "id": 1,
+      "sap": "123253",
+      "design": "CPE A",
+      "cpeData": [
         {
-            "id": 1,
-            "workerno": 30038,
-            "name": "Tiago Silva",
-            "password": "tiago",
-            "token": "fake-jwt -token-123"
+          "id": 1,
+          "sn": "CA912Q0S5U7W1",
+          "mac": "329030EF19F7",
+          "ean": "978020137962",
+          "status": "Received",
+          "testStatus": "TEST_OK",
+          "receptionId": "RECEP123"
+        },
+        {
+          "id": 2,
+          "sn": "CA9125Q3R1S42",
+          "mac": "",
+          "ean": "",
+          "status": "",
+          "testStatus": "",
+          "receptionId": ""
+        },
+        {
+          "id": 3,
+          "sn": "CA912Q0S5U7W1",
+          "mac": "8B32F24EFA56",
+          "status": "Dispatched",
+          "testStatus": "TEST_OK",
+          "receptionId": "RECEP323",
+          "ean": ""
         }
-    ],
-
-    "cpes": [
+      ],
+      "allowedServices": [
         {
-            "id": 1,
-            "sap": "123253",
-            "design": "CPE A",
-            "cpeData": [
-                {
-                    "id": 1,
-                    "sn": "CA912Q0S5U7W1",
-                    "mac": "329030EF19F7",
-                    "ean": "978020137962",
-                    "status": "Received",
-                    "testStatus": "TEST_OK",
-                    "receptionId": "RECEP123"
-                },
-
-                {
-                    "id": 2,
-                    "sn": "CA9125Q3R1S42",
-                    "mac": "",
-                    "ean": "",
-                    "status": "",
-                    "testStatus": "",
-                    "receptionId": ""
-                },
-
-                {
-                    "id": 3,
-                    "sn": "CA912Q0S5U7W1",
-                    "mac": "8B32F24EFA56",
-                    "status": "Dispatched",
-                    "testStatus": "TEST_OK",
-                    "receptionId": "RECEP323",
-                    "ean": ""
-                }
-            ],
-            "allowedServices": [
-                {
-                    "id": 1,
-                    "description": "Cleaning"
-                },
-
-                {
-                    "id": 2,
-                    "description": "Polishing"
-                },
-
-                {
-                    "id": 3,
-                    "description": "WiFi Sticker"
-                },
-
-                {
-                    "id": 4,
-                    "description": "Cpe Sticker"
-                },
-
-                {
-                    "id": 5,
-                    "description": "Warranty Sticker"
-                },
-
-                {
-                    "id": 6,
-                    "description": "Left Cover"
-                },
-
-                {
-                    "id": 7,
-                    "description": "Right Cover"
-                }
-            ]
-        },
-
-        {
-            "id": 2,
-            "sap": "123153",
-            "design": "CPE B",
-            "cpeData": [
-                {
-                    "id": 1,
-                    "sn": "CB212C3D1304",
-                    "mac": "329030EF19F7",
-                    "ean": "3544168518603",
-                    "status": "Received",
-                    "testStatus": "TEST_OK",
-                    "receptionId": "RECEP433"
-                },
-
-                {
-                    "id": 2,
-                    "sn": "CB212N5P8R31",
-                    "mac": "329030EF19F7",
-                    "status": "Received",
-                    "ean": "3544168518603",
-                    "testStatus": "TEST_NOK",
-                    "receptionId": "RECEP433"
-                }
-            ],
-            "allowedServices": [
-                {
-                    "id": 1,
-                    "description": "Cleaning"
-                },
-
-                {
-                    "id": 2,
-                    "description": "Polishing"
-                },
-
-                {
-                    "id": 3,
-                    "description": "Bottom Cover"
-                },
-
-                {
-                    "id": 4,
-                    "description": "Top Cover"
-                },
-
-                {
-                    "id": 5,
-                    "description": "Warranty Sticker"
-                }
-            ]
-        },
-
-        {
-            "id": 3,
-            "sap": "123353",
-            "design": "CPE C",
-            "cpeData": [
-                {
-                    "id": 1,
-                    "sn": "CC1J5K2L9M41231",
-                    "mac": "",
-                    "ean": "401234567890",
-                    "status": "Received",
-                    "testStatus": "",
-                    "receptionId": "RECEP353"
-                },
-
-                {
-                    "id": 2,
-                    "sn": "CC36B9D0F2H4215",
-                    "mac": "CEF61866CD3B",
-                    "ean": "401234567890", 
-                    "status": "Received",
-                    "testStatus": "TEST_NOK",
-                    "receptionId": "RECEP352"
-                }
-            ]
+          "id": 1,
+          "description": "Cleaning"
         },
         {
-            "id": 4,
-            "sap": "123453",
-            "design": "CPE D"
+          "id": 2,
+          "description": "Polishing"
         },
-
         {
-            "id": 5,
-            "sap": "123553",
-            "design": "CPE E"
+          "id": 3,
+          "description": "WiFi Sticker"
         },
-
         {
-            "id": 6,
-            "sap": "123653",
-            "design": "CPE F"
+          "id": 4,
+          "description": "Cpe Sticker"
         },
-
         {
-            "id": 7,
-            "sap": "123753",
-            "design": "CPE G"
+          "id": 5,
+          "description": "Warranty Sticker"
         },
-
         {
-            "id": 8,
-            "sap": "123853",
-            "design": "CPE H"
+          "id": 6,
+          "description": "Left Cover"
         },
-
         {
-            "id": 9,
-            "sap": "123953",
-            "design": "CPE I"
+          "id": 7,
+          "description": "Right Cover"
         }
-    ]
+      ]
+    },
+    {
+      "id": 2,
+      "sap": "123153",
+      "design": "CPE B",
+      "cpeData": [
+        {
+          "id": 1,
+          "sn": "CB212C3D1304",
+          "mac": "329030EF19F7",
+          "ean": "3544168518603",
+          "status": "Received",
+          "testStatus": "TEST_OK",
+          "receptionId": "RECEP433"
+        },
+        {
+          "id": 2,
+          "sn": "CB212N5P8R31",
+          "mac": "329030EF19F7",
+          "status": "Received",
+          "ean": "3544168518603",
+          "testStatus": "TEST_NOK",
+          "receptionId": "RECEP433"
+        }
+      ],
+      "allowedServices": [
+        {
+          "id": 1,
+          "description": "Cleaning"
+        },
+        {
+          "id": 2,
+          "description": "Polishing"
+        },
+        {
+          "id": 3,
+          "description": "Bottom Cover"
+        },
+        {
+          "id": 4,
+          "description": "Top Cover"
+        },
+        {
+          "id": 5,
+          "description": "Warranty Sticker"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "sap": "123353",
+      "design": "CPE C",
+      "cpeData": [
+        {
+          "id": 1,
+          "sn": "CC1J5K2L9M41231",
+          "mac": "",
+          "ean": "401234567890",
+          "status": "Received",
+          "testStatus": "",
+          "receptionId": "RECEP353"
+        },
+        {
+          "id": 2,
+          "sn": "CC36B9D0F2H4215",
+          "mac": "CEF61866CD3B",
+          "ean": "401234567890",
+          "status": "Received",
+          "testStatus": "TEST_NOK",
+          "receptionId": "RECEP352"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "sap": "123453",
+      "design": "CPE D"
+    },
+    {
+      "id": 5,
+      "sap": "123553",
+      "design": "CPE E"
+    },
+    {
+      "id": 6,
+      "sap": "123653",
+      "design": "CPE F"
+    },
+    {
+      "id": 7,
+      "sap": "123753",
+      "design": "CPE G"
+    },
+    {
+      "id": 8,
+      "sap": "123853",
+      "design": "CPE H"
+    },
+    {
+      "id": 9,
+      "sap": "123953",
+      "design": "CPE I"
+    },
+    {
+      "id": 74,
+      "cpe": {
+        "id": 1,
+        "sap": "123253",
+        "design": "CPE A",
+        "allowedServices": [],
+        "cpeData": [
+          {
+            "sn": "CA912Q0S5U7W1",
+            "ean": "978020137962",
+            "mac": "329030EF19F7",
+            "status": "Received",
+            "testStatus": "TEST_OK",
+            "dateHourTest": "19/05/2025",
+            "receptionId": "RECEP123"
+          }
+        ]
+      },
+      "dateHourOperation": "2025-05-19T17:16:18.153Z",
+      "user": {
+        "id": 1,
+        "workerno": 30038,
+        "name": "Tiago Silva",
+        "password": "tiago",
+        "token": "fake-jwt -token-123"
+      },
+      "servicesApplied": [
+        "Polishing",
+        "WiFi Sticker"
+      ]
+    },
+    {
+      "id": 31,
+      "cpe": {
+        "id": 1,
+        "sap": "123253",
+        "design": "CPE A",
+        "allowedServices": [],
+        "cpeData": [
+          {
+            "sn": "CA912Q0S5U7W1",
+            "ean": "978020137962",
+            "mac": "329030EF19F7",
+            "status": "Received",
+            "testStatus": "TEST_OK",
+            "dateHourTest": "19/05/2025",
+            "receptionId": "RECEP123"
+          }
+        ]
+      },
+      "dateHourOperation": "2025-05-19T17:23:55.671Z",
+      "user": {
+        "id": 1,
+        "workerno": 30038,
+        "name": "Tiago Silva"
+      },
+      "servicesApplied": [
+        "Cleaning",
+        "Polishing"
+      ]
+    },
+    {
+      "id": 77,
+      "cpe": {
+        "id": 1,
+        "sap": "123253",
+        "design": "CPE A",
+        "allowedServices": [],
+        "cpeData": [
+          {
+            "sn": "CA912Q0S5U7W1",
+            "ean": "978020137962",
+            "mac": "329030EF19F7",
+            "status": "Received",
+            "testStatus": "TEST_OK",
+            "dateHourTest": "19/05/2025",
+            "receptionId": "RECEP123"
+          }
+        ]
+      },
+      "dateHourOperation": "2025-05-19T17:24:58.633Z",
+      "user": {
+        "id": 1,
+        "workerno": 30038,
+        "name": "Tiago Silva"
+      },
+      "servicesApplied": [
+        "Polishing",
+        "Warranty Sticker"
+      ]
+    },
+    {
+      "id": 7,
+      "cpe": {
+        "id": 1,
+        "sap": "123253",
+        "design": "CPE A",
+        "allowedServices": [],
+        "cpeData": [
+          {
+            "sn": "CA912Q0S5U7W1",
+            "ean": "978020137962",
+            "mac": "329030EF19F7",
+            "status": "Received",
+            "testStatus": "TEST_OK",
+            "dateHourTest": "19/05/2025",
+            "receptionId": "RECEP123"
+          }
+        ]
+      },
+      "dateHourOperation": "2025-05-19T17:25:40.928Z",
+      "user": {
+        "id": 1,
+        "workerno": 30038,
+        "name": "Tiago Silva"
+      },
+      "servicesApplied": [
+        "Cleaning",
+        "Polishing"
+      ]
+    },
+    {
+      "id": 85,
+      "cpe": {
+        "id": 1,
+        "sap": "123253",
+        "design": "CPE A",
+        "allowedServices": [],
+        "cpeData": [
+          {
+            "sn": "CA912Q0S5U7W1",
+            "ean": "978020137962",
+            "mac": "329030EF19F7",
+            "status": "Received",
+            "testStatus": "TEST_OK",
+            "dateHourTest": "19/05/2025",
+            "receptionId": "RECEP123"
+          }
+        ]
+      },
+      "dateHourOperation": "2025-05-19T17:25:56.650Z",
+      "user": {
+        "id": 1,
+        "workerno": 30038,
+        "name": "Tiago Silva"
+      },
+      "servicesApplied": [
+        "Polishing",
+        "Warranty Sticker"
+      ]
+    }
+  ]
 }
