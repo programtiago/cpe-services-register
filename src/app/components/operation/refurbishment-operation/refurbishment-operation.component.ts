@@ -7,7 +7,7 @@ import { StatusCpe } from '../../../../model/enum/statusCpe';
 import { RefurbishmentOperation } from '../../../../model/refurbishmentOperation';
 import { AuthService } from '../../auth/services/auth.service';
 import { User } from '../../../../model/user';
-import { SnackbarService } from './services/snackbar.service';
+import { SnackbarService } from '../../../shared/custom-snackbar/snackbar.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
@@ -46,6 +46,8 @@ export class RefurbishmentOperationComponent implements AfterViewChecked{
 
   refurbishmentFormOperation: FormGroup;
 
+  serialNumberInputDisabled: boolean = false;
+
   constructor(private refurbishmentService: RefurbishmentService, private cdref: ChangeDetectorRef, private authService: AuthService, 
     private snackbarService: SnackbarService, private fb: FormBuilder
   ){
@@ -58,6 +60,7 @@ export class RefurbishmentOperationComponent implements AfterViewChecked{
 
     this.loadAllCpesToList();
     this.loadUserLogged();
+    this.loadAllRefurbishmentOperationsCpe();
   }
 
   ngAfterViewChecked(): void {
@@ -116,6 +119,12 @@ export class RefurbishmentOperationComponent implements AfterViewChecked{
       event.preventDefault(); //doesn't allow to change focus to the next field
       this.serialNumberScanned = (event.target as HTMLInputElement).value; //assign to serialNumber where happened the event
 
+      const snAlreadyScanned = this.checkIfSerialNumberWasAlreadyScanned(this.serialNumberScanned);
+
+      if (snAlreadyScanned){
+        this.snackbarService.warning(`S/N: ${this.serialNumberScanned} was already scanned. `)
+      }
+
       this.validateSn(this.serialNumberScanned)
     }
   }
@@ -153,6 +162,7 @@ export class RefurbishmentOperationComponent implements AfterViewChecked{
       return;
     }else{
       this.cpeMessageErrorNotValid = '';
+      this.serialNumberInputDisabled = true;
     }
 
     if (!this.evaluateCpeStatusAndTestStatus(sn, this.cpeChoosen)){
@@ -271,9 +281,10 @@ export class RefurbishmentOperationComponent implements AfterViewChecked{
       .subscribe({
         next: (res) => {
           if (res?.id != null){
-            this.snackbarService.sucess(`Refurbishment operation on S/N ${this.cpeRefurbishmentRegister.cpe.cpeData[0].sn} sucessfully registered ! `);
+            this.snackbarService.success(`Refurbishment operation on S/N ${this.cpeRefurbishmentRegister.cpe.cpeData[0].sn} sucessfully registered ! `);
           }
           this.clearFields();
+          this.serialNumberInputDisabled = false;
       },
       error: (err) => {
         this.snackbarService.error(`Unfortunately an unexpected error occurred. Please try again`)
@@ -301,5 +312,18 @@ export class RefurbishmentOperationComponent implements AfterViewChecked{
     if (value.length == 0){
       this.serialNumberValid = false;
     }
+  }
+
+  checkIfSerialNumberWasAlreadyScanned(sn: string): boolean{
+    let isDuplicatedScanned = false
+    this.listRefurbishmentRegister.forEach(element => {
+        if (element.cpe.cpeData[0].sn == sn){
+          isDuplicatedScanned = true;
+        }else{
+          isDuplicatedScanned = false;
+        }
+    });
+
+    return isDuplicatedScanned;
   }
 }

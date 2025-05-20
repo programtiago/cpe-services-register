@@ -11,6 +11,8 @@ import { AppMaterialModule } from './shared/app-material/app-material.module';
 import { RefurbishmentOperationComponent } from './components/operation/refurbishment-operation/refurbishment-operation.component';
 import { RepairOperationComponent } from './components/operation/repair-operation/repair-operation.component';
 import { provideHttpClient } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
+import { CustomSnackbarComponent } from './shared/custom-snackbar/custom-snackbar.component';
 
 @NgModule({
   declarations: [
@@ -18,12 +20,14 @@ import { provideHttpClient } from '@angular/common/http';
     LoginComponent,
     HeaderComponent,
     RefurbishmentOperationComponent,
-    RepairOperationComponent
+    RepairOperationComponent,
+    CustomSnackbarComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    AppMaterialModule
+    AppMaterialModule,
+    CommonModule
   ],
   providers: [
     provideAnimationsAsync(),

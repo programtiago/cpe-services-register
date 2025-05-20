@@ -1,7 +1,7 @@
 {
   "users": [
     {
-      "id": 1,
+      "id": "1",
       "workerno": 30038,
       "name": "Tiago Silva",
       "password": "tiago",
@@ -10,7 +10,7 @@
   ],
   "cpes": [
     {
-      "id": 1,
+      "id": "1",
       "sap": "123253",
       "design": "CPE A",
       "cpeData": [
@@ -74,7 +74,7 @@
       ]
     },
     {
-      "id": 2,
+      "id": "2",
       "sap": "123153",
       "design": "CPE B",
       "cpeData": [
@@ -121,7 +121,7 @@
       ]
     },
     {
-      "id": 3,
+      "id": "3",
       "sap": "123353",
       "design": "CPE C",
       "cpeData": [
@@ -146,36 +146,65 @@
       ]
     },
     {
-      "id": 4,
+      "id": "4",
       "sap": "123453",
       "design": "CPE D"
     },
     {
-      "id": 5,
+      "id": "5",
       "sap": "123553",
       "design": "CPE E"
     },
     {
-      "id": 6,
+      "id": "6",
       "sap": "123653",
       "design": "CPE F"
     },
     {
-      "id": 7,
+      "id": "7",
       "sap": "123753",
       "design": "CPE G"
     },
     {
-      "id": 8,
+      "id": "8",
       "sap": "123853",
       "design": "CPE H"
     },
     {
-      "id": 9,
+      "id": "9",
       "sap": "123953",
       "design": "CPE I"
     }
   ],
   "refurbishment-operations": [
+    {
+      "id": 27,
+      "cpe": {
+        "id": "1",
+        "sap": "123253",
+        "design": "CPE A",
+        "allowedServices": [],
+        "cpeData": [
+          {
+            "sn": "CA912Q0S5U7W1",
+            "ean": "978020137962",
+            "mac": "329030EF19F7",
+            "status": "Received",
+            "testStatus": "TEST_OK",
+            "dateHourTest": "2025-05-20T15:38:12.181Z",
+            "receptionId": "RECEP123"
+          }
+        ]
+      },
+      "dateHourOperation": "2025-05-20T15:38:12.181Z",
+      "user": {
+        "id": "1",
+        "workerno": 30038,
+        "name": "Tiago Silva"
+      },
+      "servicesApplied": [
+        "Polishing"
+      ]
+    }
   ]
 }
