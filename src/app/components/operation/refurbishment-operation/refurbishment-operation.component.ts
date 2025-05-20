@@ -293,6 +293,13 @@ export class RefurbishmentOperationComponent implements AfterViewChecked{
 
   clearFields(){
     this.refurbishmentFormOperation.controls['serialNumber'].setValue(''); 
+    this.refurbishmentFormOperation.controls['service'].setValue(false)
     this.clearServiesAppliedAndInvalidateSerialNumber();
+  }
+
+  onChangeSerialNumberInput(value: string){
+    if (value.length == 0){
+      this.serialNumberValid = false;
+    }
   }
 }
