@@ -174,157 +174,37 @@
       "id": 9,
       "sap": "123953",
       "design": "CPE I"
-    },
+    }
+  ],
+  "refurbishment-operations": [
     {
-      "id": 74,
+      "id": 68,
       "cpe": {
-        "id": 1,
-        "sap": "123253",
-        "design": "CPE A",
+        "id": 2,
+        "sap": "123153",
+        "design": "CPE B",
         "allowedServices": [],
         "cpeData": [
           {
-            "sn": "CA912Q0S5U7W1",
-            "ean": "978020137962",
+            "sn": "CB212C3D1304",
+            "ean": "3544168518603",
             "mac": "329030EF19F7",
             "status": "Received",
             "testStatus": "TEST_OK",
-            "dateHourTest": "19/05/2025",
-            "receptionId": "RECEP123"
+            "dateHourTest": "20/05/2025",
+            "receptionId": "RECEP433"
           }
         ]
       },
-      "dateHourOperation": "2025-05-19T17:16:18.153Z",
+      "dateHourOperation": "2025-05-20T08:40:06.697Z",
       "user": {
-        "id": 1,
-        "workerno": 30038,
-        "name": "Tiago Silva",
-        "password": "tiago",
-        "token": "fake-jwt -token-123"
-      },
-      "servicesApplied": [
-        "Polishing",
-        "WiFi Sticker"
-      ]
-    },
-    {
-      "id": 31,
-      "cpe": {
-        "id": 1,
-        "sap": "123253",
-        "design": "CPE A",
-        "allowedServices": [],
-        "cpeData": [
-          {
-            "sn": "CA912Q0S5U7W1",
-            "ean": "978020137962",
-            "mac": "329030EF19F7",
-            "status": "Received",
-            "testStatus": "TEST_OK",
-            "dateHourTest": "19/05/2025",
-            "receptionId": "RECEP123"
-          }
-        ]
-      },
-      "dateHourOperation": "2025-05-19T17:23:55.671Z",
-      "user": {
-        "id": 1,
+        "id": "1",
         "workerno": 30038,
         "name": "Tiago Silva"
       },
       "servicesApplied": [
-        "Cleaning",
+        "Warranty Sticker",
         "Polishing"
-      ]
-    },
-    {
-      "id": 77,
-      "cpe": {
-        "id": 1,
-        "sap": "123253",
-        "design": "CPE A",
-        "allowedServices": [],
-        "cpeData": [
-          {
-            "sn": "CA912Q0S5U7W1",
-            "ean": "978020137962",
-            "mac": "329030EF19F7",
-            "status": "Received",
-            "testStatus": "TEST_OK",
-            "dateHourTest": "19/05/2025",
-            "receptionId": "RECEP123"
-          }
-        ]
-      },
-      "dateHourOperation": "2025-05-19T17:24:58.633Z",
-      "user": {
-        "id": 1,
-        "workerno": 30038,
-        "name": "Tiago Silva"
-      },
-      "servicesApplied": [
-        "Polishing",
-        "Warranty Sticker"
-      ]
-    },
-    {
-      "id": 7,
-      "cpe": {
-        "id": 1,
-        "sap": "123253",
-        "design": "CPE A",
-        "allowedServices": [],
-        "cpeData": [
-          {
-            "sn": "CA912Q0S5U7W1",
-            "ean": "978020137962",
-            "mac": "329030EF19F7",
-            "status": "Received",
-            "testStatus": "TEST_OK",
-            "dateHourTest": "19/05/2025",
-            "receptionId": "RECEP123"
-          }
-        ]
-      },
-      "dateHourOperation": "2025-05-19T17:25:40.928Z",
-      "user": {
-        "id": 1,
-        "workerno": 30038,
-        "name": "Tiago Silva"
-      },
-      "servicesApplied": [
-        "Cleaning",
-        "Polishing"
-      ]
-    },
-    {
-      "id": 85,
-      "cpe": {
-        "id": 1,
-        "sap": "123253",
-        "design": "CPE A",
-        "allowedServices": [],
-        "cpeData": [
-          {
-            "sn": "CA912Q0S5U7W1",
-            "ean": "978020137962",
-            "mac": "329030EF19F7",
-            "status": "Received",
-            "testStatus": "TEST_OK",
-            "dateHourTest": "19/05/2025",
-            "receptionId": "RECEP123"
-          }
-        ]
-      },
-      "dateHourOperation": "2025-05-19T17:25:56.650Z",
-      "user": {
-        "id": 1,
-        "workerno": 30038,
-        "name": "Tiago Silva"
-      },
-      "servicesApplied": [
-        "Polishing",
-        "Warranty Sticker"
       ]
     }
   ]

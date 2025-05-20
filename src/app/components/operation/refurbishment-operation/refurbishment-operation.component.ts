@@ -26,7 +26,7 @@ export class RefurbishmentOperationComponent implements AfterViewChecked{
 
   lengthSn: number = 0; 
 
-  userLogged: User | null;
+  userLogged: User | null = null;
 
   //represents the error to show after sn scanned: 
   /* - if doesn't follow the parten of cpe choosen 
@@ -46,12 +46,9 @@ export class RefurbishmentOperationComponent implements AfterViewChecked{
   constructor(private refurbishmentService: RefurbishmentService, private cdref: ChangeDetectorRef, private authService: AuthService, 
     private snackbarService: SnackbarService
   ){
-    this.refurbishmentService.getAllCpes().subscribe((res) => {
-      this.cpesAvailable = res;
-    })
 
-    this.userLogged = this.authService.getLoggedUser();
-
+    this.loadAllCpesToList();
+    this.loadUserLogged();
   }
 
   ngAfterViewChecked(): void {
@@ -60,6 +57,16 @@ export class RefurbishmentOperationComponent implements AfterViewChecked{
       this.shouldFocusSerialInput = false;
       this.cdref.detectChanges();
     }
+  }
+
+  loadUserLogged(){
+    this.userLogged = this.authService.getLoggedUser();
+  }
+
+  loadAllCpesToList(){
+    this.refurbishmentService.getAllCpes().subscribe((res) => {
+      this.cpesAvailable = res;
+    })
   }
 
   //defines the length allowed on serial input for each cpe 
@@ -93,10 +100,10 @@ export class RefurbishmentOperationComponent implements AfterViewChecked{
     if (event.key === 'Tab'){
       event.preventDefault(); //doesn't allow to change focus to the next field
       this.serialNumberScanned = (event.target as HTMLInputElement).value; //assign to serialNumber where happened the event
+
       this.validateSn(this.serialNumberScanned)
     }
   }
-
 
   validateSn(sn: string){
     //if the cpe wasn't choosen the sn isn't valid
@@ -198,11 +205,10 @@ export class RefurbishmentOperationComponent implements AfterViewChecked{
     const cpe = this.cpesAvailable.find(cpe => cpe.id === this.cpeChoosen.id);
 
     this.allowedServicesApplyToCpe = cpe?.allowedServices ?? [];
-
   }
 
-  registerOperationCpeRefurbishment(){
-
+  //this method will be responsible to hold the object that saveOperationRefurbishment will use to do the post request
+  protected registerOperationCpeRefurbishment(): RefurbishmentOperation{
     this.cpeRefurbishmentRegister = {
       id: Math.floor(Math.random() * 101),
       cpe: {
@@ -227,10 +233,17 @@ export class RefurbishmentOperationComponent implements AfterViewChecked{
       servicesApplied: this.servicesApplied
     }
 
+    this.saveOperationRefurbishment();
+    return this.cpeRefurbishmentRegister;
+  }
+
+  //this method will subscribe the endpoint on service and will return a response with the object created and store the object on the list
+  saveOperationRefurbishment(){
     this.refurbishmentService.createRefurbishmentOperationCpe(this.cpeRefurbishmentRegister).subscribe((res) => {
       if (res.id != null){
-         this.snackbarService.sucess(`Refurbishment operation on S/N ${this.cpeRefurbishmentRegister.cpe.cpeData[0].sn} sucessfully registered ! `);
-         this.listRefurbishmentRegister.push(res);
+        console.log("Res" + res)
+        this.snackbarService.sucess(`Refurbishment operation on S/N ${this.cpeRefurbishmentRegister.cpe.cpeData[0].sn} sucessfully registered ! `);
+        this.listRefurbishmentRegister.push(res);
       }
     })
   }

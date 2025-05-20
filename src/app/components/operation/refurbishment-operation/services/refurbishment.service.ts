@@ -10,6 +10,7 @@ import { RefurbishmentOperation } from '../../../../../model/refurbishmentOperat
 export class RefurbishmentService {
 
   private urlCpe = 'http://localhost:3000/cpes';
+  private urlRefurbishmentCpeOperations = 'http://localhost:3000/refurbishment-operations'
 
   constructor(private http: HttpClient) { }
 
@@ -22,6 +23,10 @@ export class RefurbishmentService {
   }
 
   createRefurbishmentOperationCpe(refurbishmentOperation: RefurbishmentOperation){
-    return this.http.post<RefurbishmentOperation>(`${this.urlCpe}`, refurbishmentOperation)
+    return this.http.post<RefurbishmentOperation>(`${this.urlRefurbishmentCpeOperations}`, refurbishmentOperation)
+  }
+
+  getAllRefurbishmentOperationsCpe():Observable<RefurbishmentOperation[]>{
+    return this.http.get<RefurbishmentOperation[]>(`${this.urlRefurbishmentCpeOperations}`)
   }
 }
