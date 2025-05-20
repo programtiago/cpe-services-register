@@ -209,6 +209,13 @@ export class RefurbishmentOperationComponent implements AfterViewChecked{
 
   //this method will be responsible to hold the object that saveOperationRefurbishment will use to do the post request
   protected registerOperationCpeRefurbishment(): RefurbishmentOperation{
+    const cpeData = this.cpeChoosen.cpeData?.[0];
+
+    if (!cpeData){
+      console.error('CPE data is missing.');
+      return null as any;
+    }
+
     this.cpeRefurbishmentRegister = {
       id: Math.floor(Math.random() * 101),
       cpe: {
@@ -239,11 +246,23 @@ export class RefurbishmentOperationComponent implements AfterViewChecked{
 
   //this method will subscribe the endpoint on service and will return a response with the object created and store the object on the list
   saveOperationRefurbishment(){
-    this.refurbishmentService.createRefurbishmentOperationCpe(this.cpeRefurbishmentRegister).subscribe((res) => {
-      if (res.id != null){
-        console.log("Res" + res)
-        this.snackbarService.sucess(`Refurbishment operation on S/N ${this.cpeRefurbishmentRegister.cpe.cpeData[0].sn} sucessfully registered ! `);
-        this.listRefurbishmentRegister.push(res);
+    if (!this.cpeRefurbishmentRegister){
+      console.error('Cannot save: refurbishment register is undefined')
+      return;
+    }
+
+    this.refurbishmentService
+      .createRefurbishmentOperationCpe(this.cpeRefurbishmentRegister)
+      .subscribe({
+        next: (res) => {
+          if (res?.id != null){
+            this.snackbarService.sucess(`Refurbishment operation on S/N ${this.cpeRefurbishmentRegister.cpe.cpeData[0].sn} sucessfully registered ! `);
+          }
+          this.listRefurbishmentRegister.push(res);
+      },
+      error: (err) => {
+        this.snackbarService.error(`Unfortunately an unexpected error occurred. Please try again`)
+        console.log(err)
       }
     })
   }
