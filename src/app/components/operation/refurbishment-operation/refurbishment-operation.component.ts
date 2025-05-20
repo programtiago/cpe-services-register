@@ -8,6 +8,7 @@ import { RefurbishmentOperation } from '../../../../model/refurbishmentOperation
 import { AuthService } from '../../auth/services/auth.service';
 import { User } from '../../../../model/user';
 import { SnackbarService } from './services/snackbar.service';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-refurbishment-operation',
@@ -43,9 +44,17 @@ export class RefurbishmentOperationComponent implements AfterViewChecked{
   cpeRefurbishmentRegister!: RefurbishmentOperation;
   listRefurbishmentRegister: RefurbishmentOperation[] = []
 
+  refurbishmentFormOperation: FormGroup;
+
   constructor(private refurbishmentService: RefurbishmentService, private cdref: ChangeDetectorRef, private authService: AuthService, 
-    private snackbarService: SnackbarService
+    private snackbarService: SnackbarService, private fb: FormBuilder
   ){
+
+    this.refurbishmentFormOperation = this.fb.group({
+      cpeModel: [''],
+      serialNumber: [''],
+      service: [false]
+    })
 
     this.loadAllCpesToList();
     this.loadUserLogged();
@@ -69,6 +78,12 @@ export class RefurbishmentOperationComponent implements AfterViewChecked{
     })
   }
 
+  loadAllRefurbishmentOperationsCpe(){
+    this.refurbishmentService.getAllRefurbishmentOperationsCpe().subscribe((res) => {
+      this.listRefurbishmentRegister = res;
+    })
+  }
+
   //defines the length allowed on serial input for each cpe 
   defineLengthSerialNumber(){
     if (this.cpeChoosen.design === 'CPE A'){
@@ -86,7 +101,7 @@ export class RefurbishmentOperationComponent implements AfterViewChecked{
     this.cpeMessageErrorNotValid = ''
     this.serialNumberScanned = '';
     this.defineLengthSerialNumber();
-    console.log(this.lengthSn)
+
     this.shouldFocusSerialInput = true;
 
       setTimeout(() => {
@@ -230,7 +245,7 @@ export class RefurbishmentOperationComponent implements AfterViewChecked{
             mac: this.cpeChoosen.cpeData[0]?.mac,
             status: this.cpeChoosen.cpeData[0]?.status,
             testStatus: this.cpeChoosen.cpeData[0]?.testStatus,
-            dateHourTest: new Date().toLocaleDateString(),
+            dateHourTest: new Date().toISOString(),
             receptionId: this.cpeChoosen.cpeData[0]?.receptionId,
           }
         ],
@@ -258,7 +273,7 @@ export class RefurbishmentOperationComponent implements AfterViewChecked{
           if (res?.id != null){
             this.snackbarService.sucess(`Refurbishment operation on S/N ${this.cpeRefurbishmentRegister.cpe.cpeData[0].sn} sucessfully registered ! `);
           }
-          this.listRefurbishmentRegister.push(res);
+          this.clearFields();
       },
       error: (err) => {
         this.snackbarService.error(`Unfortunately an unexpected error occurred. Please try again`)
@@ -269,5 +284,15 @@ export class RefurbishmentOperationComponent implements AfterViewChecked{
 
   onChange(value: any){
     this.servicesApplied.push(value);
+  }
+
+  protected clearServiesAppliedAndInvalidateSerialNumber(){
+    this.servicesApplied = [];
+    this.serialNumberValid = false;
+  }
+
+  clearFields(){
+    this.refurbishmentFormOperation.controls['serialNumber'].setValue(''); 
+    this.clearServiesAppliedAndInvalidateSerialNumber();
   }
 }

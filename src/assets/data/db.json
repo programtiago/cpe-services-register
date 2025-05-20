@@ -177,35 +177,5 @@
     }
   ],
   "refurbishment-operations": [
-    {
-      "id": 68,
-      "cpe": {
-        "id": 2,
-        "sap": "123153",
-        "design": "CPE B",
-        "allowedServices": [],
-        "cpeData": [
-          {
-            "sn": "CB212C3D1304",
-            "ean": "3544168518603",
-            "mac": "329030EF19F7",
-            "status": "Received",
-            "testStatus": "TEST_OK",
-            "dateHourTest": "20/05/2025",
-            "receptionId": "RECEP433"
-          }
-        ]
-      },
-      "dateHourOperation": "2025-05-20T08:40:06.697Z",
-      "user": {
-        "id": "1",
-        "workerno": 30038,
-        "name": "Tiago Silva"
-      },
-      "servicesApplied": [
-        "Warranty Sticker",
-        "Polishing"
-      ]
-    }
   ]
 }

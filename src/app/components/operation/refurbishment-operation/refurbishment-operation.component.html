@@ -1,10 +1,10 @@
 <div class="refurbishment-operation-card">
     <mat-card>
         <mat-card-content>
-           <form class="refurbishment-operation-form">
+           <form [formGroup]="refurbishmentFormOperation" class="refurbishment-operation-form">
             <mat-form-field appearance="fill" class="full-width">
                 <mat-label>CPE</mat-label>
-                <mat-select style="font-size: 1.5em;" name="modelSelect" (selectionChange)="chooseCpeChoosen()" [(ngModel)]="cpeChoosen" placeholder="Select the desired cpe">
+                <mat-select style="font-size: 1.5em;" name="modelSelect" (selectionChange)="chooseCpeChoosen()" formControlName="cpeModel" [(ngModel)]="cpeChoosen" placeholder="Select the desired cpe">
                     <mat-option *ngFor="let cpe of cpesAvailable" [value]="cpe">
                             {{ cpe.design }}
                         </mat-option>
@@ -18,13 +18,12 @@
 
             <mat-form-field *ngIf="cpeChoosen" appearance="fill" class="full-width" [ngClass]="{'sucess-state': cpeMessageErrorNotValid === '' && serialNumberValid, 'error-state': cpeMessageErrorNotValid !== ''}">
                 <mat-label>S/N</mat-label>
-                <input [maxLength]="lengthSn" name="serialNumber" [(ngModel)]="serialNumberScanned" #serialNumberInput (keydown)="handleSerialNumberScan($event)" style="font-size: 1.5rem;" type="text" matInput placeholder="S/N">
+                <input [maxLength]="lengthSn" name="serialNumber" formControlName="serialNumber" [(ngModel)]="serialNumberScanned" #serialNumberInput (keydown)="handleSerialNumberScan($event)" style="font-size: 1.5rem;" type="text" matInput placeholder="S/N">
                 <mat-icon style="transform: scale(1.5);" matPrefix class="material-symbols-outlined">barcode_scanner</mat-icon>
                 <mat-icon class="sucess-serialNumber-read-icon" *ngIf="serialNumberValid && cpeChoosen" matSuffix style="color: #388e3c;">check_circle</mat-icon>
                 <mat-icon class="fail-serialNumber-read-icon" *ngIf="!serialNumberValid && cpeChoosen && this.serialNumberScanned.length != 0" matSuffix style="color: red;">cancel</mat-icon>
             </mat-form-field>
-           </form>
-           <mat-card *ngIf="serialNumberValid">
+            <mat-card *ngIf="serialNumberValid">
             <mat-card-header style="display: flex; justify-content: center;">
                 <mat-icon class="cleaning_services_icon" fontSet="material-symbols-outlined">cleaning_services</mat-icon>
                 <mat-card-title>Apply Services</mat-card-title>
@@ -32,11 +31,12 @@
             <mat-card-content style="display: flex; justify-content: center;">
                 <div class="checkbox-group">
                     <div *ngFor="let service of allowedServicesApplyToCpe">
-                        <mat-checkbox (change)="onChange(service.description)">{{service.description}}</mat-checkbox>
+                        <mat-checkbox formControlName="service" (change)="onChange(service.description)">{{service.description}}</mat-checkbox>
                     </div>
                 </div>
             </mat-card-content>
            </mat-card>
+           </form>
         </mat-card-content>
         <mat-card-actions *ngIf="serialNumberValid && this.servicesApplied.length > 0" style="display: flex; justify-content: center; margin-bottom: 1em;">
             <button (click)="registerOperationCpeRefurbishment()" mat-button fontSet="material-symbols-outlined"><mat-icon class="register-refurbishment-operation-icon">add_circle</mat-icon></button>
