@@ -1,10 +1,19 @@
 .snackbar-icon {
   font-size: 25px;
+  flex-shrink: 0;
 }
 
-.snackbar-container{
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    font-size: 20px;
+
+.snackbar-message {
+  font-size: 1.2em;
+  flex: 1;
+  padding-left: 15px;
 }
+
+
+.snackbar-container{
+  display: flex;
+  align-items: center;
+}
+
+

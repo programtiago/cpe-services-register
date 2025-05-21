@@ -5,7 +5,7 @@ import { CustomSnackbarComponent } from './custom-snackbar.component';
 @Injectable({
   providedIn: 'root'
 })
-//Snackbar responsible to show the snackbar and show the correctly message
+//Snackbar responsible to show the snackbar and show the correctly message with the icon 
 export class SnackbarService {
 
   constructor(private snackbar: MatSnackBar) {
