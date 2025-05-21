@@ -1,5 +1,11 @@
 <div class="refurbishment-operation-card">
     <mat-card>
+        <mat-card-header class="refurbishment-card-header">
+            <mat-icon class="cleaning_services_icon" fontSet="material-symbols-outlined">cleaning_services</mat-icon>
+            <mat-card-title class="refurbishment-card-title">
+                <h2>Applied Services</h2>
+            </mat-card-title>
+        </mat-card-header>
         <mat-card-content>
            <form [formGroup]="refurbishmentFormOperation" class="refurbishment-operation-form">
             <mat-form-field appearance="fill" class="full-width">
@@ -25,14 +31,10 @@
                 <mat-icon class="fail-serialNumber-read-icon" *ngIf="!serialNumberValid && cpeChoosen && this.serialNumberScanned.length != 0" matSuffix style="color: red;">cancel</mat-icon>
             </mat-form-field>
             <mat-card *ngIf="serialNumberValid">
-            <mat-card-header style="display: flex; justify-content: center;">
-                <mat-icon class="cleaning_services_icon" fontSet="material-symbols-outlined">cleaning_services</mat-icon>
-                <mat-card-title>Applied Services</mat-card-title>
-            </mat-card-header>
             <mat-card-content style="display: flex; justify-content: center;">
                 <div class="checkbox-group">
                     <div *ngFor="let service of allowedServicesApplyToCpe">
-                        <mat-checkbox formControlName="service" (change)="onChange(service, $event.checked)">{{service.description}}</mat-checkbox>
+                        <mat-checkbox formControlName="service" (change)="onChange(service, $event.checked)"><span style="font-size: 2em;">{{service.description}}</span></mat-checkbox>
                     </div>
                 </div>
             </mat-card-content>

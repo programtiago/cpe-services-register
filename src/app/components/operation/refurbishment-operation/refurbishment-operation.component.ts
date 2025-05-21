@@ -8,8 +8,7 @@ import { RefurbishmentOperation } from '../../../../model/refurbishmentOperation
 import { AuthService } from '../../auth/services/auth.service';
 import { User } from '../../../../model/user';
 import { SnackbarService } from '../../../shared/custom-snackbar/snackbar.service';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { MatCheckbox } from '@angular/material/checkbox';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-refurbishment-operation',
@@ -286,6 +285,7 @@ export class RefurbishmentOperationComponent implements AfterViewChecked{
           }
           this.clearFields();
           this.serialNumberInputDisabled = false;
+          this.serialNumberInput.nativeElement.focus();
       },
       error: (err) => {
         this.snackbarService.error(`Unfortunately an unexpected error occurred. Please try again`)

@@ -177,5 +177,45 @@
     }
   ],
   "refurbishment-operations": [
+    {
+      "id": 2,
+      "cpe": {
+        "id": "1",
+        "sap": "123253",
+        "design": "CPE A",
+        "allowedServices": [],
+        "cpeData": [
+          {
+            "sn": "CA912Q0S5U7W1",
+            "ean": "978020137962",
+            "mac": "329030EF19F7",
+            "status": "Received",
+            "testStatus": "TEST_OK",
+            "dateHourTest": "2025-05-21T15:28:01.255Z",
+            "receptionId": "RECEP123"
+          }
+        ]
+      },
+      "dateHourOperation": "2025-05-21T15:28:01.255Z",
+      "user": {
+        "id": "1",
+        "workerno": 30038,
+        "name": "Tiago Silva"
+      },
+      "servicesApplied": [
+        {
+          "id": 2,
+          "description": "Polishing"
+        },
+        {
+          "id": 6,
+          "description": "Left Cover"
+        },
+        {
+          "id": 4,
+          "description": "Cpe Sticker"
+        }
+      ]
+    }
   ]
 }
