@@ -32,7 +32,7 @@
             <mat-card-content style="display: flex; justify-content: center;">
                 <div class="checkbox-group">
                     <div *ngFor="let service of allowedServicesApplyToCpe">
-                        <mat-checkbox formControlName="service" (change)="onChange(service.description)">{{service.description}}</mat-checkbox>
+                        <mat-checkbox formControlName="service" (change)="onChange(service, $event.checked)">{{service.description}}</mat-checkbox>
                     </div>
                 </div>
             </mat-card-content>

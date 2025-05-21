@@ -117,46 +117,41 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 .cdk-overlay-container .cdk-global-overlay-wrapper {
-  top: 64px !important;
+  top: 56px !important;
 }
 
 ::ng-deep .cdk-overlay-container{
+  position: fixed !important;
   display: flex;
   justify-content: center;
+  align-items: flex-start;
 }
 
 ::ng-deep .cdk-global-overlay-wrapper{
-  display: flex;
-  justify-content: center;
-  width: 100%;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: flex-start !important;
+  width: 100% !important;
 }
 
 ::ng-deep .cdk-overlay-pane {
   width: 100% !important;
-  max-width: none !important;
+  max-width: 100% !important;
 }
 
 ::ng-deep .mat-mdc-snack-bar-container {
-  width: 100%;
-  max-width: 100%;
-  border-radius: 0;
-  margin: 0;
-  justify-content: center;
-  text-align: center;
-}
-
-::ng-deep .mat-mdc-snack-bar-container {
-  width: 100%;
-  max-width: 100%;
-  border-radius: 0;
-  margin: 0;
-  padding: 16px;
+  width: 100% !important;
+  max-width: 100% !important;
+  border-radius: 0 !important;
+  margin: 0 !important;
+  padding: 16px !important;
   box-sizing: border-box;
-  display: flex;
+  display: flex !important;
   align-items: center;
-  justify-content: center;
+  justify-content: center !important;
   white-space: normal;    
   word-break: break-word;  
+  text-align: center;
 }
 
 

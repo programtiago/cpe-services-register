@@ -1,4 +1,4 @@
-import { AfterViewChecked, ChangeDetectorRef, Component, ElementRef, ViewChild } from '@angular/core';
+import { AfterViewChecked, ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { RefurbishmentService } from './services/refurbishment.service';
 import { Cpe } from '../../../../model/cpe';
 import { CPE_SN_FORMATS } from '../../../../utils/serialNumberFormat';
@@ -8,7 +8,8 @@ import { RefurbishmentOperation } from '../../../../model/refurbishmentOperation
 import { AuthService } from '../../auth/services/auth.service';
 import { User } from '../../../../model/user';
 import { SnackbarService } from '../../../shared/custom-snackbar/snackbar.service';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { MatCheckbox } from '@angular/material/checkbox';
 
 @Component({
   selector: 'app-refurbishment-operation',
@@ -293,8 +294,18 @@ export class RefurbishmentOperationComponent implements AfterViewChecked{
     })
   }
 
-  onChange(value: any){
-    this.servicesApplied.push(value);
+  //check if checkbox is checked 
+  // if is add the object service to servicesApplied array
+  //if not removes the object
+  onChange(value: Service, isChecked: boolean){
+    if (isChecked){
+      this.servicesApplied.push(value);
+    }else{
+      const index = this.servicesApplied.indexOf(value);
+      if (index > -1){
+        this.servicesApplied.splice(index, 1);
+      }
+    }
   }
 
   protected clearServiesAppliedAndInvalidateSerialNumber(){
