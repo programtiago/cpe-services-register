@@ -4,6 +4,7 @@
             <form [formGroup]="loginForm">
                 <mat-card-title>Login</mat-card-title>
 
+                <span class="login-error-msg" [innerHTML]="loginError"></span>
                 <mat-form-field appearance="outline">
                     <mat-label>Work Number</mat-label>
                     <input name="workerno" matInput formControlName="workerno" placeholder="Número Mecanográfico" required>
@@ -21,7 +22,7 @@
                         <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
                     </button>
 
-                    <mat-error *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+                    <mat-error *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched && loginForm.get('password')?.errors?.['invalidPassword']">
                         Please enter a valid password.
                     </mat-error>
                 </mat-form-field>

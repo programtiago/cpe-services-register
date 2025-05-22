@@ -13,10 +13,12 @@ export class LoginComponent {
   loginForm!: FormGroup;
   hidePassword = true;
 
+  loginError: string = '';
+
   constructor(private fb: FormBuilder, private router: Router, private authService: AuthService){
     this.loginForm = this.fb.group({
       workerno: [null, [this.workerNoValidator()]],
-      password: [null, [Validators.required]]
+      password: [null, [this.passwordValidator()]]
     })
   }
 
@@ -27,6 +29,19 @@ export class LoginComponent {
 
       if (value && !regexWorkNumber.test(value)){
         return { invalidWorkerNo: true };
+      }
+
+      return null;
+    }
+  }
+
+  passwordValidator(): ValidatorFn {
+    return (control : AbstractControl): ValidationErrors | null => {
+      const regexPassword = /^[a-z][0-9]{4}$/; //accepts only 1 letter lowercase from a to z and 4 digits between 0 and 9
+      const value = control.value;
+
+      if (value && !regexPassword.test(value)){
+        return { invalidPassword: true };
       }
 
       return null;
@@ -44,7 +59,8 @@ export class LoginComponent {
         console.log(res)
       },
       error: (err) => {
-        console.log(err)
+        this.loginError = "Worker Number or Password doesn't exist. <br> Please try again ! "
+        this.loginForm.controls['password'].setValue('')
       }
     })
   }

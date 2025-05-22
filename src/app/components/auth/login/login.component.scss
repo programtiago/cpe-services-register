@@ -9,6 +9,13 @@
     color: black !important;
 }
 
+.login-error-msg{
+    color: red;
+    font-size: 1em;
+    font-style: bold;
+    margin-bottom: 1.5em;
+}
+
 .container{
     display: flex;
     justify-content: center;
