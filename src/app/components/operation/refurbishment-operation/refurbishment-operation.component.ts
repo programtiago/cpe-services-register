@@ -1,4 +1,4 @@
-import { AfterViewChecked, ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewChecked, ChangeDetectorRef, Component, ElementRef, ViewChild } from '@angular/core';
 import { RefurbishmentService } from './services/refurbishment.service';
 import { Cpe } from '../../../../model/cpe';
 import { CPE_SN_FORMATS } from '../../../../utils/serialNumberFormat';
@@ -9,6 +9,7 @@ import { AuthService } from '../../auth/services/auth.service';
 import { User } from '../../../../model/user';
 import { SnackbarService } from '../../../shared/custom-snackbar/snackbar.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { MatCheckbox } from '@angular/material/checkbox';
 
 @Component({
   selector: 'app-refurbishment-operation',
@@ -47,6 +48,7 @@ export class RefurbishmentOperationComponent implements AfterViewChecked{
   refurbishmentFormOperation: FormGroup;
 
   serialNumberInputDisabled: boolean = false;
+  @ViewChild('checkbox') checkboxComponent!: MatCheckbox;
 
   constructor(private refurbishmentService: RefurbishmentService, private cdref: ChangeDetectorRef, private authService: AuthService, 
     private snackbarService: SnackbarService, private fb: FormBuilder

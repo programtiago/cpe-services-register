@@ -56,7 +56,7 @@ export class LoginComponent {
     this.authService.login(this.loginForm.value.workerno, this.loginForm.value.password).subscribe({
       next: (res) => {
         this.router.navigate(['/refurbishment']);
-        console.log(res)
+        this.authService.setUser(res);
       },
       error: (err) => {
         this.loginError = "Worker Number or Password doesn't exist. <br> Please try again ! "

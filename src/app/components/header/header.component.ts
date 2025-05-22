@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
+import { AuthService } from '../auth/services/auth.service';
+import { User } from '../../../model/user';
 
 @Component({
   selector: 'app-header',
@@ -10,8 +12,11 @@ import { filter } from 'rxjs';
 export class HeaderComponent implements OnInit{
 
   operationTitle: string = '';
+  userLogged: User | null = null;
 
-  constructor(private router: Router){
+  constructor(private router: Router, private authService: AuthService){
+    this.userLogged = this.authService.getLoggedUser();
+
     if (this.router.url === '/refurbishment'){
       console.log(this.router.url)
       this.operationTitle = 'Refurbishment'

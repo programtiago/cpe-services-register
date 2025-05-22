@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { User } from '../../../../model/user';
 import { map } from 'rxjs';
 
@@ -9,6 +9,8 @@ import { map } from 'rxjs';
 export class AuthService {
 
   private apiUrl = 'http://localhost:3000'
+
+  userLogged = signal<User | null>(null)
 
   constructor(private http: HttpClient) { }
 
@@ -26,6 +28,14 @@ export class AuthService {
     )
   }
 
+  setUser(user: User){
+    this.userLogged.set(user);
+  }
+
+  getUser(){
+    return this.userLogged;
+  }
+
   getSafeUser(user: User): Omit<User, 'password' | 'token'>{
     const { password, token, ...safeUser } = user;
     
@@ -37,6 +47,7 @@ export class AuthService {
     if (!user) {
       throw new Error('No user is currently logged in.');
     }
+
     return JSON.parse(user) as User;
   }
 

@@ -4,8 +4,9 @@
         <button class="operation-button" style="color: black;" mat-raised-button [matMenuTriggerFor]="operationsMenu">{{operationTitle}}</button>
         <span class="spacer"></span>
         <div class="menu-navbar">
+            <span style="color: white; padding-right: 10px;">{{userLogged?.workerno}}</span>
             <button class="employee_icon_menu" mat-icon-button [matMenuTriggerFor]="logoutMenu">
-                <mat-icon>account_circle</mat-icon>
+                <mat-icon style="transform: scale(1.3);">account_circle</mat-icon>
             </button>
 
             <mat-menu #operationsMenu="matMenu">

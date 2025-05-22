@@ -1,5 +1,5 @@
-<div class="refurbishment-operation-card">
-    <mat-card>
+<div>
+    <mat-card class="refurbishment-operation-card">
         <mat-card-header class="refurbishment-card-header">
             <mat-icon class="cleaning_services_icon" fontSet="material-symbols-outlined">cleaning_services</mat-icon>
             <mat-card-title class="refurbishment-card-title">
@@ -10,7 +10,7 @@
            <form [formGroup]="refurbishmentFormOperation" class="refurbishment-operation-form">
             <mat-form-field appearance="fill" class="full-width">
                 <mat-label>CPE</mat-label>
-                <mat-select style="font-size: 2em;" name="modelSelect" (selectionChange)="chooseCpeChoosen()" formControlName="cpeModel" [(ngModel)]="cpeChoosen" placeholder="Select the desired cpe">
+                <mat-select style="font-size: 1.5em;" name="modelSelect" (selectionChange)="chooseCpeChoosen()" formControlName="cpeModel" [(ngModel)]="cpeChoosen" placeholder="Select the desired cpe">
                     <mat-option *ngFor="let cpe of cpesAvailable" [value]="cpe">
                             {{ cpe.design }}
                         </mat-option>
@@ -30,18 +30,18 @@
                 <mat-icon class="sucess-serialNumber-read-icon" *ngIf="serialNumberValid && cpeChoosen" matSuffix style="color: #388e3c;">check_circle</mat-icon>
                 <mat-icon class="fail-serialNumber-read-icon" *ngIf="!serialNumberValid && cpeChoosen && this.serialNumberScanned.length != 0" matSuffix style="color: red;">cancel</mat-icon>
             </mat-form-field>
-            <mat-card *ngIf="serialNumberValid">
+            <mat-card *ngIf="serialNumberValid" class="applied-services-card">
             <mat-card-content style="display: flex; justify-content: center;">
                 <div class="checkbox-group">
-                    <div *ngFor="let service of allowedServicesApplyToCpe">
-                        <mat-checkbox formControlName="service" (change)="onChange(service, $event.checked)"><span style="font-size: 2em;">{{service.description}}</span></mat-checkbox>
+                    <div class="checkbox-item" *ngFor="let service of allowedServicesApplyToCpe">
+                        <mat-checkbox class="touch-checkbox" #checkboxRef formControlName="service" (change)="onChange(service, $event.checked)"><span style="font-size: 2em;">{{service.description}}</span></mat-checkbox>
                     </div>
                 </div>
             </mat-card-content>
            </mat-card>
            </form>
         </mat-card-content>
-        <mat-card-actions *ngIf="serialNumberValid && this.servicesApplied.length > 0" style="display: flex; justify-content: center; margin-bottom: 1em;">
+        <mat-card-actions *ngIf="serialNumberValid && this.servicesApplied.length > 0" style="display: flex; justify-content: center; margin-bottom: 0.5em;">
             <button class="register-refurbishment-operation-btn" (click)="registerOperationCpeRefurbishment()" style="background-color: black; color: white;" aria-label="Register CPE Refurbishment Operation" mat-raised-button><mat-icon class="register-refurbishment-operation-icon">save</mat-icon>Registar</button>
         </mat-card-actions>
     </mat-card>
