@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 
@@ -15,9 +15,22 @@ export class LoginComponent {
 
   constructor(private fb: FormBuilder, private router: Router, private authService: AuthService){
     this.loginForm = this.fb.group({
-      workerno: [null, [Validators.required]],
+      workerno: [null, [this.workerNoValidator()]],
       password: [null, [Validators.required]]
     })
+  }
+
+  workerNoValidator(): ValidatorFn {
+    return (control : AbstractControl): ValidationErrors | null => {
+      const regexWorkNumber = /^[0-9]{5}$/; //numbers between 0 and 9 and has 5 digits
+      const value = control.value;
+
+      if (value && !regexWorkNumber.test(value)){
+        return { invalidWorkerNo: true };
+      }
+
+      return null;
+    }
   }
 
   tooglePasswordVisibility(){
