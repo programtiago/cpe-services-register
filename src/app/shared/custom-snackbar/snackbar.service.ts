@@ -23,7 +23,7 @@ export class SnackbarService {
     this.show(message, 'warning', 'warning')
   }
 
-  private show(message: string, icon: string = '', type: 'success' | 'error' | 'info' | 'warning' = 'info', duration: number = 50000):void{
+  private show(message: string, icon: string = '', type: 'success' | 'error' | 'info' | 'warning' = 'info', duration: number = 3000):void{
     this.snackbar.openFromComponent(CustomSnackbarComponent, {
       duration,
       data: { message, icon, type },

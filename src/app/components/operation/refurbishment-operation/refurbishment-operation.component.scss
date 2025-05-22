@@ -19,7 +19,7 @@
         width: 80%;
         max-width: 1000px;
         min-width: 600px;
-        margin: 7em auto;
+        margin: 3.5em auto;
     }
 
     .cleaning_services_icon{
@@ -85,10 +85,20 @@
 }
 
 .register-refurbishment-operation-icon{
-    font-size: 36px !important;
+    font-size: 40px !important;
     width: 36px !important;
     height: 36px !important;
+    color: white;
 }
 
+.register-refurbishment-operation-btn{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 200px;
+    height: 60px;
+    margin-top: 0.5em;
+    font-size: 18px;
+}
 
 

@@ -14,8 +14,7 @@ import { MAT_SNACK_BAR_DEFAULT_OPTIONS, MatSnackBarConfig, MatSnackBarModule } f
 
 const matSnackbarDefaultConfig: MatSnackBarConfig = {
   verticalPosition: 'top',
-  horizontalPosition: 'center',
-  duration: 50000
+  horizontalPosition: 'center'
 };
 
 @NgModule({

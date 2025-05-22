@@ -176,9 +176,21 @@ export class RefurbishmentOperationComponent implements AfterViewChecked{
     this.getAllowedServicesByCpeId();
   }
 
+  checkChangesSerialNumberInput(){
+    if (this.serialNumberScanned.length === 0){
+      this.cpeMessageErrorNotValid = ''
+    }
+  }
+
   evaluateCpeStatusAndTestStatus(sn: string, cpe: Cpe): boolean {
     const cpeEntry = cpe.cpeData?.find(data => data.sn === sn);
     console.log('CPE Entry found:', cpeEntry);
+
+    if (!cpeEntry){
+      this.cpeMessageErrorNotValid = `Serial Number indicated: ${sn} does not exist in stock`;
+      this.enableInputSerialNumber();
+      return false;
+    }
   
     let macCpe = '';
     let reception = '';
@@ -195,26 +207,25 @@ export class RefurbishmentOperationComponent implements AfterViewChecked{
 
       if (!reception || status !== StatusCpe.Received){
         this.cpeMessageErrorNotValid = `Serial Number indicated: ${sn} does not exist in stock`
+        this.enableInputSerialNumber();
         return false;
       }
 
       if (!macCpe){
         this.cpeMessageErrorNotValid = `Serial Number indicated: ${sn} does not have a test`
+        this.enableInputSerialNumber();
         return false;
       }
 
       if (!testStatus) {
         this.cpeMessageErrorNotValid = `Serial Number indicated: ${sn} does not have a test`;
+        this.enableInputSerialNumber();
         return false;
       }
 
       if (testStatus === "TEST_NOK"){
         this.cpeMessageErrorNotValid = `Serial Number indicated: ${sn} does not have a test ok !`;
-        return false;
-      }
-
-      if (!cpeEntry){
-        this.cpeMessageErrorNotValid = `Serial Number indicated: ${sn} does not exist in stock`;
+        this.enableInputSerialNumber();
         return false;
       }
 
@@ -336,5 +347,9 @@ export class RefurbishmentOperationComponent implements AfterViewChecked{
     });
 
     return isDuplicatedScanned;
+  }
+
+  enableInputSerialNumber(){
+    this.serialNumberInputDisabled = false;
   }
 }
