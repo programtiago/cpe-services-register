@@ -5,7 +5,17 @@
       "workerno": 30038,
       "name": "Tiago Silva",
       "password": "t1234",
-      "token": "fake-jwt -token-123"
+      "token": "fake-jwt-token-123",
+      "userRole": "Employee"
+    },
+
+    {
+      "id": "1",
+      "workerno": 30039,
+      "name": "Admin",
+      "password": "a1234",
+      "token": "fake-jwt-admin-token-123",
+      "userRole": "Admin"
     }
   ],
   "cpes": [
@@ -177,6 +187,5 @@
     }
   ],
   "refurbishment-operations": [
-    
   ]
 }

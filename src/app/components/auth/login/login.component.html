@@ -9,7 +9,7 @@
                     <mat-label>Work Number</mat-label>
                     <input name="workerno" matInput formControlName="workerno" placeholder="Número Mecanográfico" required>
                     <mat-error *ngIf="loginForm.get('workerno')?.invalid && loginForm.get('workerno')?.touched && loginForm.get('workerno')?.errors?.['invalidWorkerNo']" >
-                        Worker number must be 5 digits between 1 and 9.
+                        Please enter a worker number valid.
                     </mat-error>
                 </mat-form-field>
 

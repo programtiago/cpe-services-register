@@ -1,4 +1,8 @@
-<div>
+<div *ngIf="userLogged?.userRole === 'Admin'">
+    <span>ADMIN</span>
+</div>
+
+<div *ngIf="userLogged?.userRole === 'Employee'">
     <mat-card class="refurbishment-operation-card">
         <mat-card-header class="refurbishment-card-header">
             <mat-icon class="cleaning_services_icon" fontSet="material-symbols-outlined">cleaning_services</mat-icon>

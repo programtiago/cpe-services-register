@@ -20,7 +20,8 @@
         width: 100%;
         max-width: 1000px;
         min-width: 600px;
-        margin: 2.5em auto;
+        margin: 3.8em auto;
+        max-height: 80vh;
     }
 
     .cleaning_services_icon{
@@ -39,7 +40,9 @@
     }
 
     .cleaning_services_icon{
-        margin-left: 1rem;
+        margin-left: 1em;
+        margin-top: 1em;
+        transform: scale(1.5);
     }
 }
 
@@ -94,9 +97,10 @@
     display: flex;
     align-items: center;
     gap: 8px;
-    min-width: 200px;
-    height: 60px;
-    margin-top: 0.5em;
+    min-width: 250px;
+    height: 50px;
+    margin-top: 1.5em;
+    margin-bottom: 0.8em;
     font-size: 18px;
 }
 

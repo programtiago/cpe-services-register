@@ -108,6 +108,7 @@ export class RefurbishmentOperationComponent implements AfterViewChecked{
     this.defineLengthSerialNumber();
 
     this.shouldFocusSerialInput = true;
+    this.enableInputSerialNumber();
 
       setTimeout(() => {
         if (this.serialNumberInput && this.serialNumberInput.nativeElement){
@@ -148,6 +149,7 @@ export class RefurbishmentOperationComponent implements AfterViewChecked{
     if (sn.length === 0){
       this.serialNumberValid = false;
       this.cpeMessageErrorNotValid = 'You must enter a serial number to proceed !';
+      this.enableInputSerialNumber();
       return;
     }
 

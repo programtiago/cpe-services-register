@@ -1,6 +1,6 @@
 <mat-toolbar class="navbar-app">
     <mat-toolbar-row>
-        <h1 style="color: white; font-size: larger;">CPE Services Register</h1>
+        <h1 (click)="reload()" style="color: white; font-size: larger;">CPE Services Register</h1>
         <button class="operation-button" style="color: black;" mat-raised-button [matMenuTriggerFor]="operationsMenu">{{operationTitle}}</button>
         <span class="spacer"></span>
         <div class="menu-navbar">
