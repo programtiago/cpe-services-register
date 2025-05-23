@@ -15,7 +15,7 @@
             </mat-menu>
 
             <mat-menu #logoutMenu="matMenu">
-                <button routerLink="" mat-menu-item>Terminar sessão</button>
+                <button (click)="logout()" mat-menu-item>Terminar sessão</button>
             </mat-menu>
         </div>
     </mat-toolbar-row>

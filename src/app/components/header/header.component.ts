@@ -56,7 +56,14 @@ export class HeaderComponent implements OnInit{
   }
 
   reload(){
-    window.location.reload();
+   const currentUrl = this.router.url;
+   this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+    this.router.navigateByUrl(currentUrl)
+   })
   }
 
+  logout(){
+    this.authService.logout();
+    this.router.navigateByUrl('')
+  }
 }

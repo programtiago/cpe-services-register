@@ -8,7 +8,6 @@
       "token": "fake-jwt-token-123",
       "userRole": "Employee"
     },
-
     {
       "id": "1",
       "workerno": 30039,
@@ -187,5 +186,42 @@
     }
   ],
   "refurbishment-operations": [
+    {
+      "id": 25,
+      "cpe": {
+        "id": "1",
+        "sap": "123253",
+        "design": "CPE A",
+        "allowedServices": [],
+        "cpeData": [
+          {
+            "sn": "CA912Q0S5U7W1",
+            "ean": "978020137962",
+            "mac": "329030EF19F7",
+            "status": "Received",
+            "testStatus": "TEST_OK",
+            "dateHourTest": "2025-05-23T13:04:54.144Z",
+            "receptionId": "RECEP123"
+          }
+        ]
+      },
+      "dateHourOperation": "2025-05-23T13:04:54.144Z",
+      "user": {
+        "id": "1",
+        "workerno": 30038,
+        "name": "Tiago Silva",
+        "userRole": "Employee"
+      },
+      "servicesApplied": [
+        {
+          "id": 2,
+          "description": "Polishing"
+        },
+        {
+          "id": 5,
+          "description": "Warranty Sticker"
+        }
+      ]
+    }
   ]
 }
