@@ -1,15 +1,15 @@
 import { AfterViewChecked, ChangeDetectorRef, Component, ElementRef, ViewChild } from '@angular/core';
 import { RefurbishmentService } from './services/refurbishment.service';
-import { Cpe } from '../../../../model/cpe';
-import { CPE_SN_FORMATS } from '../../../../utils/serialNumberFormat';
-import { Service } from '../../../../model/service';
-import { StatusCpe } from '../../../../model/enum/statusCpe';
-import { RefurbishmentOperation } from '../../../../model/refurbishmentOperation';
-import { AuthService } from '../../auth/services/auth.service';
-import { User } from '../../../../model/user';
-import { SnackbarService } from '../../../shared/custom-snackbar/snackbar.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatCheckbox } from '@angular/material/checkbox';
+import { Cpe } from '../../../../../model/cpe';
+import { User } from '../../../../../model/user';
+import { Service } from '../../../../../model/service';
+import { RefurbishmentOperation } from '../../../../../model/refurbishmentOperation';
+import { SnackbarService } from '../../../../shared/custom-snackbar/snackbar.service';
+import { CPE_SN_FORMATS } from '../../../../../utils/serialNumberFormat';
+import { StatusCpe } from '../../../../../model/enum/statusCpe';
+import { AuthService } from '../../../../auth/services/auth.service';
 
 @Component({
   selector: 'app-refurbishment-operation',
@@ -276,7 +276,7 @@ export class RefurbishmentOperationComponent implements AfterViewChecked{
         ],
       },
       dateHourOperation: new Date(),
-      user: this.authService.getSafeUser(this.userLogged as User),
+      user: this.authService.getLoggedUser(),
       servicesApplied: this.servicesApplied
     }
 

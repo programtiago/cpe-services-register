@@ -11,8 +11,10 @@ export class AppComponent {
   constructor(private router: Router){
   }
 
+  /*
   isLoginRoute(): boolean{
-    return this.router.url === '/';
+    return this.router.url === '';
   }
+    */
 
 }

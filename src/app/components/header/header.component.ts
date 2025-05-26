@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
-import { AuthService } from '../auth/services/auth.service';
 import { User } from '../../../model/user';
+import { AuthService } from '../../auth/services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -15,7 +15,7 @@ export class HeaderComponent implements OnInit{
   userLogged: User | null = null;
 
   constructor(private router: Router, private authService: AuthService){
-    this.userLogged = this.authService.getLoggedUser();
+    //this.userLogged = this.authService.getLoggedUser();
 
     if (this.router.url === '/refurbishment'){
       console.log(this.router.url)
@@ -52,18 +52,32 @@ export class HeaderComponent implements OnInit{
   }
 
   navigateToPage(page: string){
-    this.router.navigate([page]);
+    this.router.navigate(['employees/' + page]);
   }
 
+  /*
   reload(){
    const currentUrl = this.router.url;
    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
     this.router.navigateByUrl(currentUrl)
    })
   }
+   */
+
+  isAdminLoggedIn(): boolean {
+    return this.authService.isLoggedIn() && this.authService.getLoggedUser()?.userRole === "Admin";
+  }
+
+  isEmployeeLoggedIn(): boolean {
+    return this.authService.isLoggedIn() && this.authService.getLoggedUser()?.userRole === "Employee";
+  }
 
   logout(){
+    if (this.authService.isLoggedIn() && this.authService.getLoggedUser()?.userRole === "Employee") {
+      this.router.navigate(['/login']) 
+    }else{
+      this.router.navigate(['/login']) 
+    }
     this.authService.logout();
-    this.router.navigateByUrl('')
   }
 }

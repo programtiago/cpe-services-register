@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Cpe } from '../../../../../model/cpe';
-import { RefurbishmentOperation } from '../../../../../model/refurbishmentOperation';
+import { Cpe } from '../../../../../../model/cpe';
+import { RefurbishmentOperation } from '../../../../../../model/refurbishmentOperation';
 
 @Injectable({
   providedIn: 'root'

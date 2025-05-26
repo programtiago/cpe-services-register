@@ -1,15 +1,18 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginComponent } from './components/auth/login/login.component';
-import { RefurbishmentOperationComponent } from './components/operation/refurbishment-operation/refurbishment-operation.component';
-import { RepairOperationComponent } from './components/operation/repair-operation/repair-operation.component';
-import { authGuard } from './guards/auth.guard';
+import { LoginComponent } from './auth/login/login.component';
 
 const routes: Routes = [
-  { path: '', component: LoginComponent},
-  { path: 'refurbishment', component: RefurbishmentOperationComponent, canActivate: [authGuard]},
-  { path: 'repair', component: RepairOperationComponent,  canActivate: [authGuard]}
+    { path: 'login', component: LoginComponent},
 
+    { path: 'employees', loadChildren: () => 
+      import('./employee/employee.module').then(m => m.EmployeeModule),
+    },
+
+    {
+      path: 'admin', loadChildren: () =>
+        import('./admin/admin.module').then(m => m.AdminModule)
+    }
 ];
 
 @NgModule({
