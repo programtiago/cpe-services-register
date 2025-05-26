@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, effect, OnInit, Signal } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
-import { filter } from 'rxjs';
+import { filter, Observable } from 'rxjs';
 import { User } from '../../../model/user';
 import { AuthService } from '../../auth/services/auth.service';
 
@@ -12,11 +12,9 @@ import { AuthService } from '../../auth/services/auth.service';
 export class HeaderComponent implements OnInit{
 
   operationTitle: string = '';
-  userLogged: User | null = null;
+  userLogged$: Observable<User | null> = this.authService.getUser();
 
   constructor(private router: Router, private authService: AuthService){
-    //this.userLogged = this.authService.getLoggedUser();
-
     if (this.router.url === '/refurbishment'){
       console.log(this.router.url)
       this.operationTitle = 'Refurbishment'

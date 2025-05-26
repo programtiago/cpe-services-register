@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, signal } from '@angular/core';
-import { map } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { User } from '../../../model/user';
+import { toObservable } from '@angular/core/rxjs-interop';
 
 @Injectable({
   providedIn: 'root'
@@ -15,22 +16,17 @@ export class AuthService {
   constructor(private http: HttpClient) { 
     const storedUser = localStorage.getItem('user');
 
-    if (storedUser){
-      this.userLogged.set(JSON.parse(storedUser))
-    }
+    if (storedUser) this.userLogged.set(JSON.parse(storedUser))
   }
 
   login(workerno: string, password: string){
     return this.http.get<User[]>(`${this.apiUrl}/users`).pipe(
       map(users => {
         const user = users.find(user => user.workerno.toString() === workerno && user.password === password);
-        console.log('Logged in user:', user);
         if (user){
-          console.log("User found: " + user.workerno + " " + user.password)
           localStorage.setItem('user', JSON.stringify(user))
           return user;
         }
-        console.log("User not found: " + workerno + " " + password)
         throw new Error('Invalid workerno or password');
       })
     )
@@ -41,8 +37,8 @@ export class AuthService {
     this.userLogged.set(user);
   }
 
-  getUser(){
-    return this.userLogged.asReadonly();
+  getUser():Observable<User | null>{
+    return toObservable(this.userLogged)
   }
 
   getSafeUser(user: User): Omit<User, 'password' | 'token'>{
@@ -53,8 +49,12 @@ export class AuthService {
 
   getLoggedUser(): User | null{
     const user = localStorage.getItem('user');
+
+    if (user != null){
+      return JSON.parse(user) as User;
+    }
     
-    return user ? JSON.parse(user) as User : null;
+    return null;
   }
 
   logout(): void {

@@ -63,7 +63,6 @@ export class LoginComponent {
         this.authService.setUser(res);
       },
       error: (err:any) => {
-        console.log(err);
         this.loginError = "Worker Number or Password doesn't exist. <br> Please try again ! "
         this.loginForm.controls['password'].setValue('')
       }

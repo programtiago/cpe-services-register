@@ -162,7 +162,7 @@ export class RefurbishmentOperationComponent implements AfterViewChecked{
     if (!this.serialNumberValid){
       const serial = <HTMLInputElement>this.serialNumberInput.nativeElement;
       serial.select();
-      this.cpeMessageErrorNotValid = `Serial Number indicated: ${sn} doesn't match with the cpe choosen ! `;
+      this.cpeMessageErrorNotValid = `Serial Number indicated: ${sn} does not exist in stock ! `;
       return;
     }else{
       this.cpeMessageErrorNotValid = '';
